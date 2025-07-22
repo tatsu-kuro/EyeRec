@@ -13,7 +13,7 @@
         <!--Play View Controller-->
         <scene sceneID="sPJ-MW-f3s">
             <objects>
-                <viewController storyboardIdentifier="playView" modalPresentationStyle="fullScreen" id="x93-Is-wG7" customClass="PlayViewController" customModule="iCapNYS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="playView" modalPresentationStyle="fullScreen" id="x93-Is-wG7" customClass="PlayViewController" customModule="EyeRec" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="trx-MY-Ccg">
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -96,7 +96,7 @@
         <!--Reha View Controller-->
         <scene sceneID="T3T-6O-Qp9">
             <objects>
-                <viewController storyboardIdentifier="Reha" title="BLE View Controller" id="s8e-qW-Tx0" userLabel="Reha View Controller" customClass="RehaViewController" customModule="iCapNYS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Reha" title="BLE View Controller" id="s8e-qW-Tx0" userLabel="Reha View Controller" customClass="RehaViewController" customModule="EyeRec" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5kM-co-XsD">
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -436,7 +436,7 @@
         <!--Gyro View Controller-->
         <scene sceneID="UuT-b2-VC7">
             <objects>
-                <viewController storyboardIdentifier="Gyro" id="zZD-pq-AGb" customClass="GyroViewController" customModule="iCapNYS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Gyro" id="zZD-pq-AGb" customClass="GyroViewController" customModule="EyeRec" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oud-SN-7n5">
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -571,7 +571,7 @@
         <!--Main View Controller-->
         <scene sceneID="4IL-9P-CKU">
             <objects>
-                <viewController storyboardIdentifier="RECORD" modalPresentationStyle="fullScreen" id="Hp4-gK-9UW" customClass="MainViewController" customModule="iCapNYS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RECORD" modalPresentationStyle="fullScreen" id="Hp4-gK-9UW" customClass="MainViewController" customModule="EyeRec" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bzg-mg-vx4">
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -917,7 +917,7 @@ damy</string>
         <!--List View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="mainView" title="Main View Controller" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" userLabel="List View Controller" customClass="ListViewController" customModule="iCapNYS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mainView" title="Main View Controller" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" userLabel="List View Controller" customClass="ListViewController" customModule="EyeRec" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -973,7 +973,7 @@ damy</string>
         <!--How2 View Controller-->
         <scene sceneID="Hlh-kf-1ur">
             <objects>
-                <viewController storyboardIdentifier="HOW2" modalPresentationStyle="fullScreen" id="eL6-VO-9Mc" customClass="How2ViewController" customModule="iCapNYS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HOW2" modalPresentationStyle="fullScreen" id="eL6-VO-9Mc" customClass="How2ViewController" customModule="EyeRec" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Hgq-XY-6g1">
                         <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1027,26 +1027,6 @@ damy</string>
                                     <segue destination="L4f-TZ-2V5" kind="unwind" unwindAction="unwindActionWithSegue:" id="6df-eO-x1t"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VTL-TW-i1d">
-                                <rect key="frame" x="20" y="270" width="75" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Gyro"/>
-                                <connections>
-                                    <segue destination="zZD-pq-AGb" kind="show" id="M7T-64-LOD"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Me-Vl-gFb">
-                                <rect key="frame" x="115" y="270" width="75" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Reha"/>
-                                <connections>
-                                    <segue destination="s8e-qW-Tx0" kind="show" id="J4N-u5-DEf"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5AE-QU-xbp"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1055,13 +1035,11 @@ damy</string>
                     <navigationItem key="navigationItem" id="9qM-w1-LJl"/>
                     <connections>
                         <outlet property="exitButton" destination="swt-4C-G4l" id="Dv7-Aw-paA"/>
-                        <outlet property="gyroButton" destination="VTL-TW-i1d" id="ezV-e3-Ih7"/>
                         <outlet property="imageViewOnScrollView" destination="CcR-fn-UOa" id="3rm-VS-63V"/>
                         <outlet property="imageViewOnScrollView2" destination="2Fg-3J-bhi" id="bXW-0J-gYl"/>
                         <outlet property="labelOnScrollView" destination="gi5-hE-NAh" id="uBw-1Y-pt3"/>
                         <outlet property="labelOnScrollView2" destination="LqR-kf-sMC" id="jMy-2f-rQQ"/>
                         <outlet property="labelTop" destination="Sn8-vt-gcH" id="8x3-Lq-Kbe"/>
-                        <outlet property="rehaButton" destination="9Me-Vl-gFb" id="agr-7e-FFb"/>
                         <outlet property="scrollView" destination="TtC-11-u3L" id="kiy-r1-Rfb"/>
                     </connections>
                 </viewController>
@@ -1087,19 +1065,19 @@ damy</string>
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -28,8 +28,8 @@ class How2ViewController: UIViewController {
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var exitButton: UIButton!
-    @IBOutlet weak var gyroButton: UIButton!
-    @IBOutlet weak var rehaButton: UIButton!
+//    @IBOutlet weak var gyroButton: UIButton!
+//    @IBOutlet weak var rehaButton: UIButton!
     @IBOutlet weak var imageViewOnScrollView: UIImageView!
     
     @IBOutlet weak var imageViewOnScrollView2: UIImageView!
@@ -62,10 +62,10 @@ class How2ViewController: UIViewController {
         
         // ボタン配置
         someFunctions.setButtonProperty(exitButton, x: left + bw * 6 + sp * 8, y: by, w: bw, h: bh, UIColor.darkGray)
-        someFunctions.setButtonProperty(gyroButton, x: left + sp * 1, y: by, w: bw, h: bh, UIColor.darkGray)
-        someFunctions.setButtonProperty(rehaButton, x: left + bw + sp * 2, y: by, w: bw, h: bh, UIColor.darkGray)
-        gyroButton.isHidden=true
-        rehaButton.isHidden=true
+//        someFunctions.setButtonProperty(gyroButton, x: left + sp * 1, y: by, w: bw, h: bh, UIColor.darkGray)
+//        someFunctions.setButtonProperty(rehaButton, x: left + bw + sp * 2, y: by, w: bw, h: bh, UIColor.darkGray)
+//        gyroButton.isHidden=true
+//        rehaButton.isHidden=true
         // 最上部ラベル
         let topLabelText = someFunctions.firstLang().contains("ja")
             ? "眼振を撮影するためのiPhoneを眼前に固定する装具が必要です。"
