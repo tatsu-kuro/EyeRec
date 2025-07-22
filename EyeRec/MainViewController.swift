@@ -59,7 +59,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         onCameraChange(0,focusChange:false)
     }
     
-    @IBOutlet weak var LEDBack: UILabel!
+//    @IBOutlet weak var LEDBack: UILabel!
     @IBOutlet weak var zoomBack: UILabel!
     @IBOutlet weak var exposeBack: UILabel!
     @IBOutlet weak var focusBack: UILabel!
@@ -349,9 +349,9 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     @IBOutlet weak var exposeLabel: UILabel!
     @IBOutlet weak var exposeBar: UISlider!
     
-    @IBOutlet weak var LEDBar: UISlider!
-    @IBOutlet weak var LEDLabel: UILabel!
-    @IBOutlet weak var LEDValueLabel: UILabel!
+//    @IBOutlet weak var LEDBar: UISlider!
+//    @IBOutlet weak var LEDLabel: UILabel!
+//    @IBOutlet weak var LEDValueLabel: UILabel!
     
     var frontCameraMode:Int = 0//0:manual 1:20s 2:90s
     
@@ -570,14 +570,14 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 #endif
         }
     }
-    @objc func onLEDValueChange(){
-        if cameraType != 0 && cameraType != 4{
-            resetTorch()//クラッシュ時にLEDがロックされる事があるので常に念の為、チラつくが仕方ない
-            setFlashlevel(level: LEDBar.value)
-            UserDefaults.standard.set(LEDBar.value, forKey: "ledValue")
-            LEDValueLabel.text=(Int(LEDBar.value*100)).description
-        }
-    }
+//    @objc func onLEDValueChange(){
+//        if cameraType != 0 && cameraType != 4{
+//            resetTorch()//クラッシュ時にLEDがロックされる事があるので常に念の為、チラつくが仕方ない
+//            setFlashlevel(level: LEDBar.value)
+//            UserDefaults.standard.set(LEDBar.value, forKey: "ledValue")
+//            LEDValueLabel.text=(Int(LEDBar.value*100)).description
+//        }
+//    }
     @IBAction func onFocusBarChanged(_ sender: UISlider) {
         setFocus(focus:focusBar.value)
         if cameraType==0 || cameraType==4{
@@ -651,7 +651,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         //        UserDefaults.standard.set(UIScreen.main.brightness, forKey: "brightness")
         let url="http://192.168.82.1"
         UserDefaults.standard.set(url,forKey: "urlAdress")
-        resetTorch()//クラッシュ時にLEDがロックされる事があるので常に念の為、チラつくが仕方ない
+  //      resetTorch()//クラッシュ時にLEDがロックされる事があるので常に念の為、チラつくが仕方ない
         //        KalmanInit()
         //coversは使っていないが残している。
         //        coverTopView.isHidden=true
@@ -679,13 +679,13 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         startMotionUpdates()
         initSession(fps: 60,focusChange: false)//遅ければ30fpsにせざるを得ないかも、30fpsだ！
         //露出はオートの方が良さそう
-        LEDBar.minimumValue = 0
-        LEDBar.maximumValue = 1
-        LEDBar.addTarget(self, action: #selector(onLEDValueChange), for: UIControl.Event.valueChanged)
-        LEDBar.value=UserDefaults.standard.float(forKey: "")
-        if cameraType != 0 && cameraType != 4{
-            LEDBar.value=UserDefaults.standard.float(forKey: "ledValue")
-        }
+//        LEDBar.minimumValue = 0
+//        LEDBar.maximumValue = 1
+//        LEDBar.addTarget(self, action: #selector(onLEDValueChange), for: UIControl.Event.valueChanged)
+//        LEDBar.value=UserDefaults.standard.float(forKey: "")
+//        if cameraType != 0 && cameraType != 4{
+//            LEDBar.value=UserDefaults.standard.float(forKey: "ledValue")
+//        }
         focusBar.minimumValue = 0
         focusBar.maximumValue = 1.0
         if cameraType == 0 || cameraType == 4{
@@ -726,7 +726,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
                 setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_back", ret: 0.0))
             }
             exposeValue=exposeValue//.getでgetDefaultしてその値を.setする。.setでsetExposeしそこでexposeValue表示
-            onLEDValueChange()
+  //          onLEDValueChange()
             //            print("画面が表示されて0.1秒後に1回だけ実行")
         }
         zoomBar.minimumValue = 0
@@ -1086,7 +1086,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             cameraView.isHidden=true
             quaternionView.isHidden=true
             focusParts(hide: true)
-            LEDParts(hide: true)
+ //           LEDParts(hide: true)
         }
         if recordingFlag==true {
             hideButtonsSlides()
@@ -1103,7 +1103,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             listButton.isHidden=true
             helpButton.isHidden=true
             cropSwitch.isHidden=true
-            LEDParts(hide: true)
+//            LEDParts(hide: true)
             if cameraType == 0{
                 startStopButton.alpha=0.015
                 quaternionView.alpha=0.0
@@ -1137,7 +1137,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             zoomParts(hide: false)
             exposeParts(hide: true)//false)
             focusParts(hide: false)
-            LEDParts(hide: true)//false)
+//            LEDParts(hide: true)//false)
             cropSwitch.isHidden=true//false
             cropSwitch.isEnabled=true
             helpButton.isHidden=false
@@ -1150,10 +1150,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
                 focusParts(hide: true)
                 zoomParts(hide: true)
                 exposeParts(hide: true)
-                LEDParts(hide: true)
+//                LEDParts(hide: true)
                 cropSwitch.isHidden=true
             }else if cameraType==0||cameraType==4{//front camera
-                LEDParts(hide: true)
+//                LEDParts(hide: true)
                 startStopButton.alpha=1.0
                 cropSwitch.isEnabled=false
                 cropSwitch.alpha=0.4
@@ -1163,7 +1163,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 //                    setFocusParts(type:1)
 //                }
             }else{//back camera
-                LEDParts(hide: true)//false)
+//                LEDParts(hide: true)//false)
                 startStopButton.alpha=0
  //               setFocusParts(type:2)//0:fixed 1:manual 2:auto
                 cropSwitch.isEnabled=false//true
@@ -1186,9 +1186,9 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             focusValueLabel.isHidden=true
             focusLabel.isHidden=true
             focusBack.text=""//!=someFunctions.firstLang().contains("ja") ? "自動焦点":"Autofocus"
-            LEDBar.isHidden=false
-            LEDValueLabel.isHidden=false
-            LEDLabel.isHidden=false
+//            LEDBar.isHidden=false
+//            LEDValueLabel.isHidden=false
+//            LEDLabel.isHidden=false
         }else if type==1{//manual
             focusBar.isHidden=false
             focusValueLabel.isHidden=false
@@ -1264,7 +1264,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         if cameraType == 5{//wifi
             setButtonsDisplay()
             focusParts(hide: true)
-            LEDParts(hide: true)
+//            LEDParts(hide: true)
             captureSession.stopRunning()
             return
         }
@@ -1274,7 +1274,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         initSession(fps: 60,focusChange: focusChange)
         
         
-        onLEDValueChange()
+ //       onLEDValueChange()
 //        if cameraType == 0 || cameraType == 4{
             setFocus(focus:focusBar.value)
 //        }else{
@@ -1501,13 +1501,13 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         previewLabel.frame=CGRect(x:previewSwitch.frame.maxX+sp/2,y:y1,width: bw*5,height: bh)
         explanationLabel.frame=CGRect(x:x0,y:sp,width:realWinWidth-sp*4,height: zoomLabel.frame.minY-sp)
         focusBar.frame = CGRect(x:x0+bw*4+sp*4, y: by1, width:bw*2+sp, height: bh)
-        LEDBar.frame = CGRect(x:x0+bw*4+sp*4, y: by-sp-bh, width:bw*2+sp, height: bh)
+  //      LEDBar.frame = CGRect(x:x0+bw*4+sp*4, y: by-sp-bh, width:bw*2+sp, height: bh)
         camera.setLabelProperty(focusBack,x:x0+bw*4+sp*4,y:by1,w:bw*2+sp,h:bh,UIColor.systemGray6,1)
         camera.setLabelProperty(focusLabel,x:x0+bw*3+sp*3,y:by1,w:bw,h:bh,UIColor.white)
         camera.setLabelProperty(focusValueLabel, x: x0+bw*7/2+sp*3, y: by1, w: bw/2-2, h: bh/2, UIColor.white,0)
-        camera.setLabelProperty(LEDLabel,x:x0+bw*3+sp*3,y:by-sp-bh,w:bw,h:bh,UIColor.white)
-        camera.setLabelProperty(LEDValueLabel, x: x0+bw*7/2+sp*3, y: by-sp-bh, w: bw/2-2, h: bh/2, UIColor.white,0)
-        camera.setLabelProperty(LEDBack,x:x0+bw*4+sp*4,y:by-sp-bh,w:bw*2+sp,h:bh,UIColor.systemGray6,1)
+//        camera.setLabelProperty(LEDLabel,x:x0+bw*3+sp*3,y:by-sp-bh,w:bw,h:bh,UIColor.white)
+//        camera.setLabelProperty(LEDValueLabel, x: x0+bw*7/2+sp*3, y: by-sp-bh, w: bw/2-2, h: bh/2, UIColor.white,0)
+//        camera.setLabelProperty(LEDBack,x:x0+bw*4+sp*4,y:by-sp-bh,w:bw*2+sp,h:bh,UIColor.systemGray6,1)
         exposeBar.frame = CGRect(x:x0+bw*4+sp*4, y: by1, width:bw*2+sp, height: bh)
         camera.setLabelProperty(exposeBack,x:x0+bw*4+sp*4,y:by1,w:bw*2+sp,h:bh,UIColor.systemGray6,1)
         camera.setLabelProperty(exposeLabel, x: x0+bw*3+sp*3, y: by1, w: bw, h: bh, UIColor.white,1)
@@ -1649,13 +1649,13 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         focusBar.isHidden=hide
         focusBack.isHidden=hide
     }
-    func LEDParts(hide:Bool){
-        LEDLabel.isHidden=hide
-        LEDValueLabel.isHidden=hide
-        LEDBar.isHidden=hide
-        LEDBack.isHidden=hide
-//        focusBack.isHidden=hide
-    }
+//    func LEDParts(hide:Bool){
+//        LEDLabel.isHidden=hide
+//        LEDValueLabel.isHidden=hide
+//        LEDBar.isHidden=hide
+//        LEDBack.isHidden=hide
+////        focusBack.isHidden=hide
+//    }
     func hideButtonsSlides() {
         zoomParts(hide:true)
         exposeParts(hide:true)
