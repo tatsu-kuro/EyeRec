@@ -44,20 +44,20 @@ extension UIColor {
 class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate, AVAudioPlayerDelegate  {
     let camera = MyFunctions()
     var cameraType:Int = 0
-    var cropType:Int = 0
+ //   var cropType:Int = 0
     @IBOutlet weak var explanationLabel: UILabel!
     var tempURL:String=""
     
-    @IBOutlet weak var cropSwitch: UISegmentedControl!
-    
-    @IBAction func onCropSwitch(_ sender: UISegmentedControl) {
-#if DEBUG
-        print(sender.selectedSegmentIndex)
-#endif
-        cropType = sender.selectedSegmentIndex
-        UserDefaults.standard.set(cropType, forKey: "cropType")
-        onCameraChange(0,focusChange:false)
-    }
+//    @IBOutlet weak var cropSwitch: UISegmentedControl!
+//    
+//    @IBAction func onCropSwitch(_ sender: UISegmentedControl) {
+//#if DEBUG
+//        print(sender.selectedSegmentIndex)
+//#endif
+//        cropType = sender.selectedSegmentIndex
+//        UserDefaults.standard.set(cropType, forKey: "cropType")
+//        onCameraChange(0,focusChange:false)
+//    }
     
 //    @IBOutlet weak var LEDBack: UILabel!
     @IBOutlet weak var zoomBack: UILabel!
@@ -703,8 +703,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             captureSession.stopRunning()
         }
         exposeValue=exposeValue//getDefaultしてその値をsetする。setでsetExposeしそこでexposeValue表示
-        cropType = camera.getUserDefaultInt(str: "cropType", ret: 0)
-        cropSwitch.selectedSegmentIndex = cropType
+//        cropType = camera.getUserDefaultInt(str: "cropType", ret: 0)
+//        cropSwitch.selectedSegmentIndex = cropType
         currentTime.isHidden=true
         startButton.isHidden=false
         stopButton.isHidden=true
@@ -1102,7 +1102,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             //            cameraChangeBack.isHidden=true
             listButton.isHidden=true
             helpButton.isHidden=true
-            cropSwitch.isHidden=true
+//            cropSwitch.isHidden=true
 //            LEDParts(hide: true)
             if cameraType == 0{
                 startStopButton.alpha=0.015
@@ -1138,8 +1138,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             exposeParts(hide: true)//false)
             focusParts(hide: false)
 //            LEDParts(hide: true)//false)
-            cropSwitch.isHidden=true//false
-            cropSwitch.isEnabled=true
+//            cropSwitch.isHidden=true//false
+//            cropSwitch.isEnabled=true
             helpButton.isHidden=false
             if focusChangeable==false{
                 setFocusParts(type: 0)
@@ -1151,12 +1151,12 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
                 zoomParts(hide: true)
                 exposeParts(hide: true)
 //                LEDParts(hide: true)
-                cropSwitch.isHidden=true
+//                cropSwitch.isHidden=true
             }else if cameraType==0||cameraType==4{//front camera
 //                LEDParts(hide: true)
                 startStopButton.alpha=1.0
-                cropSwitch.isEnabled=false
-                cropSwitch.alpha=0.4
+//                cropSwitch.isEnabled=false
+//                cropSwitch.alpha=0.4
 //                if focusChangeable==false{
 //                    setFocusParts(type: 0)
 //                }else{
@@ -1166,8 +1166,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 //                LEDParts(hide: true)//false)
                 startStopButton.alpha=0
  //               setFocusParts(type:2)//0:fixed 1:manual 2:auto
-                cropSwitch.isEnabled=false//true
-                cropSwitch.alpha=0//1
+//                cropSwitch.isEnabled=false//true
+//                cropSwitch.alpha=0//1
             }
         }
         if someFunctions.firstLang().contains("ja"){
@@ -1333,25 +1333,25 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         
         let videoLayer : AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
         //8,10,XR,XS,SE2,SE3 700M f2.2   11,12,13 1200M f2.2(fixFocus)   14,15,16,SE4 1200M f1.9(autoFocus)
-        cropType = camera.getUserDefaultInt(str: "cropType", ret: 0)
+//        cropType = camera.getUserDefaultInt(str: "cropType", ret: 0)
         if !focusChange && (cameraType == 0 || cameraType == 4){//拡大した部分は隠す
-            if cropType==0 || cameraType==0 || cameraType==4{//crop どこにどのサイズで表示するか。周りは隠す 1920/1080 16/9
+//            if cropType==0 || cameraType==0 || cameraType==4{//crop どこにどのサイズで表示するか。周りは隠す 1920/1080 16/9
                 videoLayer.frame = CGRect(x:leftPadding+10,y:height*2.5/6,width:height*(16/9)/6,height:height/6)
-            }else if cropType==1{// 6/4倍拡大し、左拡大部分上下拡大部分は削除
-                videoLayer.frame = CGRect(x:leftPadding+10-height*4/27,y:height*(2.5-0.25)/6,width:height*(16/9)/4,height:height/4)
-            }else if cropType==2{// 6/3倍拡大し、左拡大部分上下拡大部分は削除
-                videoLayer.frame = CGRect(x:leftPadding+10-height*8/27,y:height*(2.5-0.5)/6,width:height*(16/9)/3,height:height/3)
-            }
+//            }else if cropType==1{// 6/4倍拡大し、左拡大部分上下拡大部分は削除
+//                videoLayer.frame = CGRect(x:leftPadding+10-height*4/27,y:height*(2.5-0.25)/6,width:height*(16/9)/4,height:height/4)
+//            }else if cropType==2{// 6/3倍拡大し、左拡大部分上下拡大部分は削除
+//                videoLayer.frame = CGRect(x:leftPadding+10-height*8/27,y:height*(2.5-0.5)/6,width:height*(16/9)/3,height:height/3)
+//            }
             
         }else{//backCamera　拡大した部分は表示されない
-            if cropType==0 || focusChange{
-                videoLayer.frame=self.view.bounds
-            }else if cropType==1{//iPhoneSE, iPhone8 1.5倍にして右下2/3を表示）
-                videoLayer.frame = CGRect(x:-width/2,y:-height/2,width:width*1.5,height:height*1.5)
-            }else if cropType==2{//for iPhone16 2倍にして右下1/4を表示
-                videoLayer.frame = CGRect(x:-width,y:-height,width:width*2,height:height*2)
-  //              videoLayer.frame = CGRect(x:-width*3/4,y:-height,width:width*2,height:height*2)//1/8左にずらす
-            }
+//            if cropType==0 || focusChange{
+//                videoLayer.frame=self.view.bounds
+//            }else if cropType==1{//iPhoneSE, iPhone8 1.5倍にして右下2/3を表示）
+//                videoLayer.frame = CGRect(x:-width/2,y:-height/2,width:width*1.5,height:height*1.5)
+//            }else if cropType==2{//for iPhone16 2倍にして右下1/4を表示
+//                videoLayer.frame = CGRect(x:-width,y:-height,width:width*2,height:height*2)
+//  //              videoLayer.frame = CGRect(x:-width*3/4,y:-height,width:width*2,height:height*2)//1/8左にずらす
+//            }
         }
         videoLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
@@ -1516,12 +1516,12 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         camera.setLabelProperty(zoomBack,x:x0+bw+sp,y:by1,w:bw*2+sp,h:bh,UIColor.systemGray6,1)
         camera.setLabelProperty(zoomLabel,x:x0,y:by1,w:bw,h:bh,UIColor.white)
         camera.setLabelProperty(zoomValueLabel, x: x0+bw/2, y: by1, w: bw/2-2, h: bh/2, UIColor.white,0)
-        cropSwitch.frame=CGRect(x:x0,y:by,width:bw*3+sp*2,height:bh)
-        cropSwitch.layer.borderColor = UIColor.black.cgColor
-        cropSwitch.layer.borderWidth = 1.0
-        cropSwitch.layer.masksToBounds = true
-        cropSwitch.layer.cornerRadius = 5
-        cropSwitch.backgroundColor = UIColor.systemGray5
+//        cropSwitch.frame=CGRect(x:x0,y:by,width:bw*3+sp*2,height:bh)
+//        cropSwitch.layer.borderColor = UIColor.black.cgColor
+//        cropSwitch.layer.borderWidth = 1.0
+//        cropSwitch.layer.masksToBounds = true
+//        cropSwitch.layer.cornerRadius = 5
+//        cropSwitch.backgroundColor = UIColor.systemGray5
         zoomBack.backgroundColor = UIColor.systemGray5
         focusBack.backgroundColor = UIColor.systemGray5
         exposeBack.backgroundColor = UIColor.systemGray5
@@ -1546,19 +1546,19 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         
         startButton.frame=CGRect(x:x0+bw*6+sp*6-sp,y:(realWinHeight-bw)/2-sp,width: bw+2*sp,height:bw+2*sp)
         stopButton.frame=CGRect(x:x0+bw*6+sp*6-sp,y:(realWinHeight-bw)/2-sp,width: bw+2*sp,height:bw+2*sp)
-        if someFunctions.firstLang().contains("ja"){
-            cropSwitch.setTitle("そのまま",forSegmentAt: 0)
-            cropSwitch.setTitle("切取 １",forSegmentAt: 1)
-            cropSwitch.setTitle("切取 ２",forSegmentAt: 2)
-        }else{
-            cropSwitch.setTitle("As is",forSegmentAt: 0)
-            cropSwitch.setTitle("Crop 1",forSegmentAt: 1)
-            cropSwitch.setTitle("Crop 2",forSegmentAt: 2)
-        }
+//        if someFunctions.firstLang().contains("ja"){
+//            cropSwitch.setTitle("そのまま",forSegmentAt: 0)
+//            cropSwitch.setTitle("切取 １",forSegmentAt: 1)
+//            cropSwitch.setTitle("切取 ２",forSegmentAt: 2)
+//        }else{
+//            cropSwitch.setTitle("As is",forSegmentAt: 0)
+//            cropSwitch.setTitle("Crop 1",forSegmentAt: 1)
+//            cropSwitch.setTitle("Crop 2",forSegmentAt: 2)
+//        }
         let normalTextAttributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 18) // 18ptに設定
         ]
-        cropSwitch.setTitleTextAttributes(normalTextAttributes, for: .normal)
+//        cropSwitch.setTitleTextAttributes(normalTextAttributes, for: .normal)
         
     }
     func applicationDidEnterBackground(_ application: UIApplication) {
@@ -1891,7 +1891,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         //width:1920で飛んで来ている
         let matrix2 = CGAffineTransform(translationX: 0, y: CGFloat(1080))
         var quaterImage:UIImage?
-        if cameraType==0 || cameraType==4 || cropType==0 || cropType==1{//cameraType==0の時はcropType:0とする
+        if cameraType==0 {//}|| cameraType==4 || cropType==0 || cropType==1{//cameraType==0の時はcropType:0とする
             var rotatedCIImage:CIImage
             //2つのアフィンを組み合わせ
             let matrix = matrix1.concatenating(matrix2)
@@ -1936,7 +1936,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
                 x0=640
                 y0=0
             }
-            let frameUIImage = (cropType==0 || cameraType==0 || cameraType==4) ? UIImage(ciImage:rotatedCIImage):UIImage(ciImage: rotatedCIImage.cropped(to: CGRect(x:x0,y:y0,width:1280,height: 720)))
+            let frameUIImage = (cameraType==0 || cameraType==4) ? UIImage(ciImage:rotatedCIImage):UIImage(ciImage: rotatedCIImage.cropped(to: CGRect(x:x0,y:y0,width:1280,height: 720)))
             UIGraphicsBeginImageContext(CGSize(width: iCapNYSWidthF, height: iCapNYSHeightF))
             frameUIImage.draw(in: CGRect(x:0, y:0, width:iCapNYSWidthF, height: iCapNYSHeightF))
             quaterImage!.draw(in: CGRect(x:iCapNYSWidthF120, y:iCapNYSWidthF120, width:iCapNYSHeightF5,height: iCapNYSHeightF5))

@@ -319,18 +319,6 @@ damy</string>
                                     <segue destination="eL6-VO-9Mc" kind="show" id="rOA-8I-9Va"/>
                                 </connections>
                             </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="wpW-D7-ZDG">
-                                <rect key="frame" x="12" y="204" width="131" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <segments>
-                                    <segment title="As is"/>
-                                    <segment title="Crop1"/>
-                                    <segment title="Crop2"/>
-                                </segments>
-                                <connections>
-                                    <action selector="onCropSwitch:" destination="Hp4-gK-9UW" eventType="valueChanged" id="Hql-Rd-Ol1"/>
-                                </connections>
-                            </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bD-tH-WDM">
                                 <rect key="frame" x="488" y="162" width="30" height="26"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -370,7 +358,6 @@ damy</string>
                         <outlet property="cameraChangeButton" destination="znc-Gv-DbE" id="KaG-mU-oFO"/>
                         <outlet property="cameraTypeLabel" destination="9KR-ld-QTe" id="3nb-BG-87L"/>
                         <outlet property="cameraView" destination="ZdO-VK-uDo" id="Sf8-EB-6k2"/>
-                        <outlet property="cropSwitch" destination="wpW-D7-ZDG" id="soY-f5-Oxe"/>
                         <outlet property="currentTime" destination="eJp-tL-Pfc" id="vx3-sB-2CR"/>
                         <outlet property="explanationLabel" destination="psM-lq-5GS" id="UcJ-ao-6Gw"/>
                         <outlet property="exposeBack" destination="mgf-3j-hwt" id="bgo-hI-mxw"/>
