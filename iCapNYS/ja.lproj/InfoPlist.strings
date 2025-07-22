@@ -1,0 +1,13 @@
+/* 
+  InfoPlist.strings
+  iCapNYS
+
+  Created by 黒田建彰 on 2023/03/19.
+  
+*/
+NSCameraUsageDescription = "眼振の動画を撮影し、アルバム( iCapNYS)に保存します。";
+NSPhotoLibraryUsageDescription = "アルバム(iCapNYS)を作成し、眼振の動画をそこに保存します。";
+NSBluetoothPeripheralUsageDescription = "Bluetoothを介してクォータニオンデータを配信します。";
+NSBluetoothAlwaysUsageDescription = "Bluetoothを介してクォータニオンデータを配信します。";
+
+

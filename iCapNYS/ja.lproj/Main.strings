@@ -1,0 +1,93 @@
+
+/* Class = "UILabel"; text = "000"; ObjectID = "5P7-2H-0RH"; */
+"5P7-2H-0RH.text" = "000";
+
+/* Class = "UILabel"; text = "000"; ObjectID = "67v-Uu-qvh"; */
+"67v-Uu-qvh.text" = "000";
+
+/* Class = "UIButton"; normalTitle = "ExitDamy"; ObjectID = "98j-l3-HIC"; */
+"98j-l3-HIC.normalTitle" = "ExitDamy";
+
+/* Class = "UILabel"; text = "record settings"; ObjectID = "9KR-ld-QTe"; */
+"9KR-ld-QTe.text" = "record settings";
+
+/* Class = "UIButton"; normalTitle = "Exit"; ObjectID = "GaH-k7-GlQ"; */
+"GaH-k7-GlQ.normalTitle" = "動画一覧";
+
+/* Class = "UIButton"; normalTitle = "Unimec"; ObjectID = "HA6-6w-dws"; */
+"HA6-6w-dws.normalTitle" = "Unimec";
+
+/* Class = "UIButton"; normalTitle = "Help"; ObjectID = "IwN-Th-8hI"; */
+"ty1-f1-v3w.normalTitle" = "使い方";
+"IwN-Th-8hI.normalTitle" = "使い方";
+"tzk-p7-bEt.normalTitle" = "再生";
+"h2W-LB-N0t.normalTitle" = "リハ";
+"9Me-Vl-gFb.normalTitle" = "リハ";
+/* Class = "UILabel"; text = "zoom"; ObjectID = "LNl-JF-QcN"; */
+"LNl-JF-QcN.text" = "ズーム";
+
+/* Class = "UILabel"; text = "record lying down for 90sec."; ObjectID = "LOn-Kn-JPU"; */
+"LOn-Kn-JPU.text" = "record lying down for 90sec.";
+
+/* Class = "UILabel"; text = "000"; ObjectID = "LyS-zd-GKa"; */
+"LyS-zd-GKa.text" = "000";
+
+/* Class = "UILabel"; text = "focus"; ObjectID = "U5M-bG-o5r"; */
+"U5M-bG-o5r.text" = "焦点";
+
+/* Class = "UIButton"; normalTitle = "Settings"; ObjectID = "VOs-bS-GtU"; */
+"VOs-bS-GtU.normalTitle" = "設定";
+
+/* Class = "UIButton"; normalTitle = "Exit"; ObjectID = "YN8-XD-5kY"; */
+"YN8-XD-5kY.normalTitle" = "戻る";
+
+/* Class = "UILabel"; text = "record sitting for 20sec."; ObjectID = "aBV-ql-gTR"; */
+"aBV-ql-gTR.text" = "record sitting for 20sec.";
+
+/* Class = "UIButton"; configuration.title = "Exit"; ObjectID = "b8u-qq-9Ct"; */
+/*"b8u-qq-9Ct.configuration.title" = "Exit";*/
+
+/* Class = "UIButton"; normalTitle = "Button"; ObjectID = "b8u-qq-9Ct"; */
+/*"b8u-qq-9Ct.normalTitle" = "Exit";*/
+
+/* Class = "UILabel"; text = "expose"; ObjectID = "bA5-Rt-Jv6"; */
+"bA5-Rt-Jv6.text" = "露出";
+
+/* Class = "UILabel"; text = "0:00"; ObjectID = "eJp-tL-Pfc"; */
+"eJp-tL-Pfc.text" = "0:00";
+
+/* XCs-DI-rah  Class = "UILabel"; text = "Preview"; ObjectID = "ek5-zF-XSc";
+"ek5-zF-XSc.text" = "Preview";*/
+"XCs-DI-rah.text" = "ビュー";
+
+/* Class = "UIButton"; normalTitle = "Enter"; ObjectID = "hQm-bU-qbl"; */
+"hQm-bU-qbl.normalTitle" = "Enter";
+
+/* Class = "UILabel"; text = "0:00"; ObjectID = "iBx-yf-Wg3"; */
+"iBx-yf-Wg3.text" = "0:00";
+
+/* Class = "UILabel"; text = "000"; ObjectID = "lzB-Ie-6Qy"; */
+"lzB-Ie-6Qy.text" = "000";
+
+/* Class = "UIButton"; normalTitle = "Skip commentary"; ObjectID = "mjm-Rl-jMd"; */
+"mjm-Rl-jMd.normalTitle" = "解説を スキップ";
+
+/* Class = "UIButton"; normalTitle = "Settings"; ObjectID = "pbb-NN-cqP"; */
+"pbb-NN-cqP.normalTitle" = "戻る";
+
+/* Class = "UILabel"; text = "上枠にwifiカメラのURLを設定して下さい。\n初期値はユニメック(株)wifiカメラのURLアドレスです。"; ObjectID = "psM-lq-5GS";
+"psM-lq-5GS.text" = "";*/
+
+/* Class = "UILabel"; text = "LED"; ObjectID = "sYh-14-k4L"; */
+"sYh-14-k4L.text" = "LED";
+
+/* Class = "UIButton"; normalTitle = "Exit"; ObjectID = "swt-4C-G4l"; */
+"swt-4C-G4l.normalTitle" = "戻る";
+
+/* Class = "UIButton"; normalTitle = "Exit"; ObjectID = "us7-si-304"; */
+"us7-si-304.normalTitle" = "戻る";
+"Hlb-B8-tbX.normalTitle" = "手動";
+"lbI-2i-GHw.normalTitle" = "自動20秒";
+"LI7-8u-g4E.normalTitle" = "自動90秒";
+
+
