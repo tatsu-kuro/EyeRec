@@ -7,16 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		692338782D030DC9000FDD14 /* positional_eng.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 692338772D030DC9000FDD14 /* positional_eng.mp4 */; };
-		6923387A2D030DDA000FDD14 /* positional.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 692338792D030DDA000FDD14 /* positional.mp4 */; };
 		6945B1A725EB207400A52272 /* MyFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6945B1A625EB207400A52272 /* MyFunctions.swift */; };
 		6945E7D92519145F00E16DDB /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6945E7D82519145F00E16DDB /* MainViewController.swift */; };
 		6945E7DC25196C3600E16DDB /* PlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6945E7DB25196C3600E16DDB /* PlayViewController.swift */; };
 		695959B629C67E790044BF40 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 695959B829C67E790044BF40 /* InfoPlist.strings */; };
 		6961FBEB257E756E004B6A8C /* How2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6961FBEA257E756D004B6A8C /* How2ViewController.swift */; };
-		6978BD2F2C00C4A100204F50 /* beep1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6978BD2E2C00C4A100204F50 /* beep1.wav */; };
-		6978BD312C00C4B300204F50 /* beep2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6978BD302C00C4B300204F50 /* beep2.wav */; };
-		6978BD332C00C4C600204F50 /* beep3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 6978BD322C00C4C600204F50 /* beep3.wav */; };
 		69D7C99A29A70FEE008B3D16 /* CameraService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D7C99929A70FEE008B3D16 /* CameraService.swift */; };
 		69E22892251834490004E53C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E22891251834490004E53C /* AppDelegate.swift */; };
 		69E22894251834490004E53C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69E22893251834490004E53C /* SceneDelegate.swift */; };
@@ -41,19 +36,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		692338772D030DC9000FDD14 /* positional_eng.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = positional_eng.mp4; sourceTree = "<group>"; };
-		692338792D030DDA000FDD14 /* positional.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = positional.mp4; sourceTree = "<group>"; };
 		6945B1A625EB207400A52272 /* MyFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFunctions.swift; sourceTree = "<group>"; };
 		6945E7D82519145F00E16DDB /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6945E7DB25196C3600E16DDB /* PlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayViewController.swift; sourceTree = "<group>"; };
 		695959B929C6C38D0044BF40 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Main.strings; sourceTree = "<group>"; };
 		695959BB29C6C38E0044BF40 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6961FBEA257E756D004B6A8C /* How2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = How2ViewController.swift; sourceTree = "<group>"; };
-		6978BD2E2C00C4A100204F50 /* beep1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = beep1.wav; path = iCapNYS/Assets.xcassets/beep1.dataset/beep1.wav; sourceTree = "<group>"; };
-		6978BD302C00C4B300204F50 /* beep2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = beep2.wav; path = iCapNYS/Assets.xcassets/beep2.dataset/beep2.wav; sourceTree = "<group>"; };
-		6978BD322C00C4C600204F50 /* beep3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = beep3.wav; path = iCapNYS/Assets.xcassets/beep3.dataset/beep3.wav; sourceTree = "<group>"; };
-		69D7C99829A70EE7008B3D16 /* iCapNYS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = iCapNYS.entitlements; sourceTree = "<group>"; };
 		69D7C99929A70FEE008B3D16 /* CameraService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraService.swift; sourceTree = "<group>"; };
+		69D947332E2F8C19004703A0 /* EyeRec.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EyeRec.entitlements; sourceTree = "<group>"; };
 		69E2288E251834490004E53C /* EyeRec.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EyeRec.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69E22891251834490004E53C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		69E22893251834490004E53C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -86,11 +76,6 @@
 		69E22885251834490004E53C = {
 			isa = PBXGroup;
 			children = (
-				6978BD2E2C00C4A100204F50 /* beep1.wav */,
-				6978BD322C00C4C600204F50 /* beep3.wav */,
-				6978BD302C00C4B300204F50 /* beep2.wav */,
-				692338772D030DC9000FDD14 /* positional_eng.mp4 */,
-				692338792D030DDA000FDD14 /* positional.mp4 */,
 				69E22890251834490004E53C /* EyeRec */,
 				69E2288F251834490004E53C /* Products */,
 			);
@@ -107,7 +92,7 @@
 		69E22890251834490004E53C /* EyeRec */ = {
 			isa = PBXGroup;
 			children = (
-				69D7C99829A70EE7008B3D16 /* iCapNYS.entitlements */,
+				69D947332E2F8C19004703A0 /* EyeRec.entitlements */,
 				69E22891251834490004E53C /* AppDelegate.swift */,
 				6945B1A625EB207400A52272 /* MyFunctions.swift */,
 				69E22893251834490004E53C /* SceneDelegate.swift */,
@@ -186,13 +171,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6923387A2D030DDA000FDD14 /* positional.mp4 in Resources */,
 				69E2289E2518344C0004E53C /* LaunchScreen.storyboard in Resources */,
-				6978BD312C00C4B300204F50 /* beep2.wav in Resources */,
 				69E2289B2518344C0004E53C /* Assets.xcassets in Resources */,
-				6978BD2F2C00C4A100204F50 /* beep1.wav in Resources */,
-				6978BD332C00C4C600204F50 /* beep3.wav in Resources */,
-				692338782D030DC9000FDD14 /* positional_eng.mp4 in Resources */,
 				69E22899251834490004E53C /* Main.storyboard in Resources */,
 				695959B629C67E790044BF40 /* InfoPlist.strings in Resources */,
 			);
