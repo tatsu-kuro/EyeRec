@@ -62,16 +62,9 @@ class How2ViewController: UIViewController {
         
         // ボタン配置
         someFunctions.setButtonProperty(exitButton, x: left + bw * 6 + sp * 8, y: by, w: bw, h: bh, UIColor.darkGray)
-//        someFunctions.setButtonProperty(gyroButton, x: left + sp * 1, y: by, w: bw, h: bh, UIColor.darkGray)
-//        someFunctions.setButtonProperty(rehaButton, x: left + bw + sp * 2, y: by, w: bw, h: bh, UIColor.darkGray)
-//        gyroButton.isHidden=true
-//        rehaButton.isHidden=true
         // 最上部ラベル
-        let topLabelText = someFunctions.firstLang().contains("ja")
-            ? "眼振を撮影するためのiPhoneを眼前に固定する装具が必要です。"
-            : "A device is necessary to secure the iPhone in front of the eye for capturing nystagmus."
         
-        labelTop.text = topLabelText
+        labelTop.text = someFunctions.firstLang().contains("ja") ? getTextJa() : getTextEn()
         labelTop.numberOfLines = 0
         labelTop.font = UIFont.systemFont(ofSize: 20)
         labelTop.frame = CGRect(x: sp, y: sp, width: ww - 2 * sp, height: 0)
@@ -94,6 +87,8 @@ class How2ViewController: UIViewController {
         let label1Y = imageViewOnScrollView.frame.maxY + sp
         labelOnScrollView.frame = CGRect(x: sp, y: label1Y, width: ww - 2 * sp, height: 0)
         labelOnScrollView.sizeToFit()
+  //以下は2個目の画像を使うときのために、コメントアウトして残しておく
+        labelOnScrollView2.text=""
  /*
         // imageViewOnScrollView2（2枚目の画像）
         let img2 = UIImage(named: "fix3")!
@@ -130,43 +125,24 @@ class How2ViewController: UIViewController {
     @IBAction func unwind2how2(segue: UIStoryboardSegue) {
         UIApplication.shared.isIdleTimerDisabled = false//スリープさせる
     }
+   
+    func getTextEn()->String{
+        let text = "This is an app for recording your own nystagmus using the front camera. Recording starts when you press the Start button in the center of the screen. While recording, the Stop button is faint and barely visible, but it is located in the center of the screen. Tapping that area will stop the recording. A thumbnail of the recorded video will appear in the top right corner of the screen, and tapping it will play the video.\n"
+        return text
+    }
     func getTextEn1()->String{
         var text = "Using a simple goggle like the one shown in the top-left photo allows you to capture stable, shake-free footage. By fixing the iPhone in place with a cut piece of cardboard against your cheeks and forehead, as shown in the top-right photo, you can also achieve relatively stable video.\n"
         
         text += "Even just holding the iPhone with your palms spread and supporting it from both index to little fingers, while pressing both thumbs against your cheeks, can produce stable footage once you get used to it. \n\nThe most recently recorded nystagmus video is displayed as a thumbnail in the upper right corner. Tapping the thumbnail will play the video. The button below the thumbnail shows a list of all recorded videos, which are displayed by recording date and duration. You can tap an item to play it, or swipe it left to delete it. All nystagmus videos are stored in the iCapNYS album, so you can also manage them—playback, deletion, and sharing—using the Photos app.\n\n"
         return text
     }
-/*    func getTextEn()->String{
-        var text = "A custom mount goggle for use with the rear camera was created using a 3D printer (see the photo just above). The iPhone is attached to the goggle using double-sided adhesive gel tape. When using this mount, set the screen cropping to ‘Crop 2’. A 100-yen LED light from Daiso is used for illumination. The 3D data is available at: \"https://kuroda33.com/jibika\".\n\n"
-        text += "2: Eye movement recording\n"
-        text += "The camera can be switched sequentially using the button at the bottom right. Pressing and holding the button will return to the previous camera. \n\n"
-        text += "3: Eye movement playback\n"
-        text += "You can play back the most recently recorded eye movement video by tapping the thumbnail in the top right. Use the button below the thumbnail to navigate to the video list screen. The videos are displayed in a list sorted by recording date and duration. Tapping an item will play the video. You can delete an item by swiping left on it. The eye movement videos are stored in the iCapNYS album, so you can manage playback, deletion, and sharing through the Photos app as well. You can send the currently playing video via email from the playback screen.\n\n"
-        text += "4: Gyro Button (Left bottom)\n"
-        text += "If you set the IP address specified by the Windows application CapNYS, you can send Gyro data to that CapNYS via WiFi. The Windows version of CapNYS can be downloaded from  \"https://kuroda33.com/jibika\".\n\n"
-        text += "5: Reha Button (Left bottom)\n"
-        text += "The iPhone's pitch, roll, and yaw movements are checked, then trigger alarms, and display the count. This feature is intended for vestibular rehabilitation.\n\n"
- //       text += "iCapNYS Version 5.6 (2025-6-13)\n\n"
-
+    func getTextJa()->String{
+        let text =  "フロントカメラで自分の眼振を録画するアプリです。中央のスタートボタンを押すと録画開始します。録画中はストップボタンは薄くてほとんど見えませんが、スクリーン中央にあります。そこをタップすると録画終了します。録画した動画のサムネールがスクリーン右上に表示され、それをタップすると再生されます。\n"
         return text
-    }*/
+    }
     func getTextJa1()->String{
         var text = "上左写真のような簡単なゴーグルを使うとブレのない映像が撮れます。上右写真のようにカットした段ボールで、頬と額に固定するとブレの少ない映像が撮れます。\n手の平を広げて両手の人差し指から小指まででiPhoneを支え、両手の親指を両頬に当てて固定するだけでも、慣れればブレの少ない映像が撮れます。\n\n"
         text += "最後に撮影した眼振動画は右上にサムネイルとして表示され、それをタップすると再生出来ます。サムネイルの下のボタンで動画が一覧表示されます。動画は撮影日時（長さ）で一覧表示されます。項目をタップすると再生出来ます。項目を左にスワイプスすると削除できます。眼振動画はiCapNYSアルバムの中に入っていますので、写真アプリでも再生、削除、送信などの管理ができます。\n再生画面から再生中の動画をメールで送信できます。\n\n"
         return text
     }
-/*    func getTextJa()->String{
-        var text = "バックカメラ利用時のための固定ゴーグルを３Dプリンターで作りました（上写真）。照明にはダイソーの100円LEDライトを利用しています。iPhoneを両面粘着ゲルテープでこのゴーグルに貼り付けます。この固定具を利用するときは、画面切り取りを「切取２」に設定して下さい。３Dデータは \"https://kuroda33.com/jibika\" に載せています。\n\n"
-        text += "2: 眼振録画\n"
-        text += "右下のボタンで使用するカメラを順次選択できます。ボタンを長押しすると前のカメラに戻れます。\n"
-        text += "フロントカメラ使用時、画面中央ボタンは録画ボタンと同等です。フロントカメラの解説付自動90秒では、録画ボタンで解説映像が流れ、それが終わると録画が開始され、90秒で自動的に録画終了します。なお、録画ボタンで解説映像をスキップ、録画の途中終了ができます。\n\n"
-        text += "3: 眼振再生\n"
-        text += "最後に撮影した眼振動画は右上のサムネイルをタップすると再生出来ます。\nその下のボタンで動画が一覧表示されます。動画は撮影日時（長さ）で一覧表示されます。項目をタップすると再生出来ます。項目を左にスワイプスすると削除できます。眼振動画はiCapNYSアルバムの中に入っていますので、写真アプリでも再生、削除、送信などの管理ができます。\n再生画面から再生中の動画をメールで送信できます。\n\n"
-        text += "4: Gyroボタン（左下）\n"
-        text += "Gyro画面では、WindowsアプリCapNYSが指定するIP-Addressを設定すると、GyroDataをWiFiでそのCapNYSに送信できます。\nWindows用CapNYSは \"https://kuroda33.com/jibika\" からダウンロードできます。詳細はCapNYSのHelpをご覧ください。\n\n"
-        text += "5: リハボタン（左下）\n"
-        text += "リハ画面に移動します。iPhoneのpitch, roll, yawの動きをチェックしてアラームを鳴らし、回数を表示します。前庭リハビリのための機能です。\n\n"
-   //     text += "iCapNYS Version 5.6 (2025-6-13)\n\n"
-        return text
-    }*/
 }
