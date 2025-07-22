@@ -547,7 +547,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
     @IBAction func onFocusBarTouchDown(_ sender: Any) {
 //        print("touchdown")
-        if cameraType==0 || cameraType==4{
+        if cameraType==0{
             onCameraChange(0,focusChange: true)
             //        initSession(fps: 60,focusChange:true)
             previewLabel.isHidden=true
@@ -1285,7 +1285,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             focusBar.value=UserDefaults.standard.float(forKey: "focusValue_front")
 //            focusParts(hide: false)
         }else{
-            focusBar.value=UserDefaults.standard.float(forKey: "focusValue_back")
+ //           focusBar.value=UserDefaults.standard.float(forKey: "focusValue_back")
 //            focusParts(hide: true)
         }
         setFocus(focus: focusBar.value)
@@ -1345,7 +1345,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             
         }else{//backCamera　拡大した部分は表示されない
 //            if cropType==0 || focusChange{
-//                videoLayer.frame=self.view.bounds
+                videoLayer.frame=self.view.bounds
 //            }else if cropType==1{//iPhoneSE, iPhone8 1.5倍にして右下2/3を表示）
 //                videoLayer.frame = CGRect(x:-width/2,y:-height/2,width:width*1.5,height:height*1.5)
 //            }else if cropType==2{//for iPhone16 2倍にして右下1/4を表示
