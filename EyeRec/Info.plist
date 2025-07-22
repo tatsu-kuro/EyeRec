@@ -26,10 +26,6 @@
 	<true/>
 	<key>NSMediaLibraryUsageDescription</key>
 	<string>アプリがメディアライブラリへアクセスするために必要です。</string>
-	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>App shares quaternion data using CoreBluetooth</string>
-	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>App shares quaternion data using CoreBluetooth</string>
 	<key>NSCameraUsageDescription</key>
 	<string>record videos of nystagmus and save them in the album( iCapNYS).</string>
 	<key>NSPhotoLibraryUsageDescription</key>
