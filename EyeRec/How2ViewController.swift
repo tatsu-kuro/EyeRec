@@ -136,7 +136,7 @@ class How2ViewController: UIViewController {
         text += "Even just holding the iPhone with your palms spread and supporting it from both index to little fingers, while pressing both thumbs against your cheeks, can produce stable footage once you get used to it. \n\nThe most recently recorded nystagmus video is displayed as a thumbnail in the upper right corner. Tapping the thumbnail will play the video. The button below the thumbnail shows a list of all recorded videos, which are displayed by recording date and duration. You can tap an item to play it, or swipe it left to delete it. All nystagmus videos are stored in the iCapNYS album, so you can also manage them—playback, deletion, and sharing—using the Photos app.\n\n"
         return text
     }
-    func getTextEn()->String{
+/*    func getTextEn()->String{
         var text = "A custom mount goggle for use with the rear camera was created using a 3D printer (see the photo just above). The iPhone is attached to the goggle using double-sided adhesive gel tape. When using this mount, set the screen cropping to ‘Crop 2’. A 100-yen LED light from Daiso is used for illumination. The 3D data is available at: \"https://kuroda33.com/jibika\".\n\n"
         text += "2: Eye movement recording\n"
         text += "The camera can be switched sequentially using the button at the bottom right. Pressing and holding the button will return to the previous camera. \n\n"
@@ -149,13 +149,13 @@ class How2ViewController: UIViewController {
  //       text += "iCapNYS Version 5.6 (2025-6-13)\n\n"
 
         return text
-    }
+    }*/
     func getTextJa1()->String{
         var text = "上左写真のような簡単なゴーグルを使うとブレのない映像が撮れます。上右写真のようにカットした段ボールで、頬と額に固定するとブレの少ない映像が撮れます。\n手の平を広げて両手の人差し指から小指まででiPhoneを支え、両手の親指を両頬に当てて固定するだけでも、慣れればブレの少ない映像が撮れます。\n\n"
         text += "最後に撮影した眼振動画は右上にサムネイルとして表示され、それをタップすると再生出来ます。サムネイルの下のボタンで動画が一覧表示されます。動画は撮影日時（長さ）で一覧表示されます。項目をタップすると再生出来ます。項目を左にスワイプスすると削除できます。眼振動画はiCapNYSアルバムの中に入っていますので、写真アプリでも再生、削除、送信などの管理ができます。\n再生画面から再生中の動画をメールで送信できます。\n\n"
         return text
     }
-    func getTextJa()->String{
+/*    func getTextJa()->String{
         var text = "バックカメラ利用時のための固定ゴーグルを３Dプリンターで作りました（上写真）。照明にはダイソーの100円LEDライトを利用しています。iPhoneを両面粘着ゲルテープでこのゴーグルに貼り付けます。この固定具を利用するときは、画面切り取りを「切取２」に設定して下さい。３Dデータは \"https://kuroda33.com/jibika\" に載せています。\n\n"
         text += "2: 眼振録画\n"
         text += "右下のボタンで使用するカメラを順次選択できます。ボタンを長押しすると前のカメラに戻れます。\n"
@@ -168,5 +168,5 @@ class How2ViewController: UIViewController {
         text += "リハ画面に移動します。iPhoneのpitch, roll, yawの動きをチェックしてアラームを鳴らし、回数を表示します。前庭リハビリのための機能です。\n\n"
    //     text += "iCapNYS Version 5.6 (2025-6-13)\n\n"
         return text
-    }
+    }*/
 }
