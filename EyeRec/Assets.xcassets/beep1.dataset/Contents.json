@@ -1,0 +1,12 @@
+{
+  "data" : [
+    {
+      "filename" : "beep1.wav",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -1,0 +1,54 @@
+
+/* Class = "UILabel"; text = "exposeLabel"; ObjectID = "67v-Uu-qvh"; */
+"67v-Uu-qvh.text" = "exposeLabel";
+
+/* Class = "UIButton"; normalTitle = "ExitDamy"; ObjectID = "98j-l3-HIC"; */
+"98j-l3-HIC.normalTitle" = "ExitDamy";
+
+/* Class = "UILabel"; text = "Tap anywhere on the screen to reset the HEAD.\nPan up or down anywhere to move the buttons."; ObjectID = "9KR-ld-QTe"; */
+"9KR-ld-QTe.text" = "Tap anywhere on the screen to reset the HEAD.\nPan up or down anywhere to move the buttons.";
+
+/* Class = "UIButton"; normalTitle = "Exit"; ObjectID = "GaH-k7-GlQ"; */
+"GaH-k7-GlQ.normalTitle" = "Exit";
+
+/* Class = "UIButton"; normalTitle = "Help"; ObjectID = "IwN-Th-8hI"; */
+"IwN-Th-8hI.normalTitle" = "Help";
+
+/* Class = "UILabel"; text = "zoom"; ObjectID = "LNl-JF-QcN"; */
+"LNl-JF-QcN.text" = "zoom";
+
+/* Class = "UILabel"; text = "頭位眼振  90秒記録"; ObjectID = "LOn-Kn-JPU"; */
+"LOn-Kn-JPU.text" = "頭位眼振  90秒記録";
+
+/* Class = "UILabel"; text = "zoomLabel"; ObjectID = "LyS-zd-GKa"; */
+"LyS-zd-GKa.text" = "zoomLabel";
+
+/* Class = "UILabel"; text = "focus"; ObjectID = "U5M-bG-o5r"; */
+"U5M-bG-o5r.text" = "focus";
+
+/* Class = "UIButton"; normalTitle = "setting"; ObjectID = "VOs-bS-GtU"; */
+"VOs-bS-GtU.normalTitle" = "setting";
+
+/* Class = "UIButton"; normalTitle = "Exit"; ObjectID = "YN8-XD-5kY"; */
+"YN8-XD-5kY.normalTitle" = "Exit";
+
+/* Class = "UILabel"; text = "自発眼振  30秒記録"; ObjectID = "aBV-ql-gTR"; */
+"aBV-ql-gTR.text" = "自発眼振  30秒記録";
+
+/* Class = "UILabel"; text = "expose"; ObjectID = "bA5-Rt-Jv6"; */
+"bA5-Rt-Jv6.text" = "expose";
+
+/* Class = "UILabel"; text = "0:00"; ObjectID = "eJp-tL-Pfc"; */
+"eJp-tL-Pfc.text" = "0:00";
+
+/* Class = "UILabel"; text = "Preview"; ObjectID = "ek5-zF-XSc"; */
+"ek5-zF-XSc.text" = "Preview";
+
+/* Class = "UILabel"; text = "LED"; ObjectID = "sYh-14-k4L"; */
+"sYh-14-k4L.text" = "LED";
+
+/* Class = "UIButton"; normalTitle = "Exit"; ObjectID = "swt-4C-G4l"; */
+"swt-4C-G4l.normalTitle" = "Exit";
+
+/* Class = "UIButton"; normalTitle = "Exit"; ObjectID = "us7-si-304"; */
+"us7-si-304.normalTitle" = "Exit";
