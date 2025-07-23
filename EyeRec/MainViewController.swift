@@ -440,55 +440,20 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         realWinWidth=view.bounds.width-leftPadding-rightPadding
         realWinHeight=view.bounds.height-topPadding-bottomPadding/2
     }
-    
-//    @IBAction func cameraTypeLabelLongPress(_ sender: UILongPressGestureRecognizer) {
-//#if DEBUG
-//        print("longbutton****")
-//#endif
-//        if sender.state == .ended{
-//            onCameraChange(-1,focusChange: false)
-//        }
-//    }
-    
-//    @IBAction func onFocusBarTouchUpOutside(_ sender: Any) {//通っていない感じ
-//        print("touchupoutside")
-//
-//        if cameraType==0 || cameraType==4{
-//            //        print("upoutside")
-//            explanationLabel.isHidden=false
-//            setZoom(level: Float(zoomValue))
-//            onCameraChange(0,focusChange: false)
-//            
-//            //        initSession(fps: 60,focusChange:false)
-//            if cameraType==0{
-//                previewLabel.isHidden=false
-//                previewSwitch.isHidden=false
-//            }
-//        }else{
-//            onCameraChange(0,focusChange: false)
-//
-//        }
-//    }
+ 
     @IBAction func onFocusBarTouchUpInside(_ sender: Any) {
-//                print("touchupinside")
         if cameraType==0 || cameraType==4{
             explanationLabel.isHidden=false
             setZoom(level: Float(zoomValue))
             onCameraChange(0,focusChange: false)
-            
-            //        initSession(fps: 60,focusChange:false)
-            if cameraType==0{
+              if cameraType==0{
                 previewLabel.isHidden=false
                 previewSwitch.isHidden=false
                 startStopButton.alpha=1.0
-
             }
-//        }else{
-//            onCameraChange(0,focusChange: false)
         }
     }
     @IBAction func onFocusBarTouchDown(_ sender: Any) {
-//        print("touchdown")
         if cameraType==0{
             onCameraChange(0,focusChange: true)
             //        initSession(fps: 60,focusChange:true)
@@ -512,14 +477,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 #endif
         }
     }
-//    @objc func onLEDValueChange(){
-//        if cameraType != 0 && cameraType != 4{
-//            resetTorch()//クラッシュ時にLEDがロックされる事があるので常に念の為、チラつくが仕方ない
-//            setFlashlevel(level: LEDBar.value)
-//            UserDefaults.standard.set(LEDBar.value, forKey: "ledValue")
-//            LEDValueLabel.text=(Int(LEDBar.value*100)).description
-//        }
-//    }
+
     @IBAction func onFocusBarChanged(_ sender: UISlider) {
         setFocus(focus:focusBar.value)
         if cameraType==0 || cameraType==4{
@@ -528,10 +486,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             UserDefaults.standard.set(focusBar.value, forKey: "focusValue_back")
         }
     }
-    
-    //    @IBAction func onChangeCameraButton(_ sender: Any) {
-    //        onCameraChange(1,focusChange: false)
-    //    }
+
     var screenUpDown:Bool=false
     var screenUpDownLatest:Bool=false
     func startMotionUpdates() {
@@ -587,30 +542,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
        //ここでscreenが上か下かチェックしてdrawHead()で頭を回転させる。
          screenUpDownLatest=screenUpDown
     }
-/*
- override func viewDidLoad() {
-     super.viewDidLoad()
 
-     // 画面構成など軽量処理のみ
-     getPaddings()
-     setteiMode = 1
-     autoRecordMode = false
-     frontCameraMode = someFunctions.getUserDefaultInt(str: "frontCameraMode", ret: 0)
-     cameraType = 0
-     previewSwitch.isOn = (getUserDefault(str: "previewOn", ret: 0) != 0)
-
-     // 非同期で重い処理を後回し
-     DispatchQueue.global(qos: .userInitiated).async {
-         self.requestPhotoLibraryPermissionAndLoadVideos()
-         self.getCameras()
-
-         DispatchQueue.main.async {
-             // カメラ設定などUI更新があればここで
-             self.setupCameraPreview()
-         }
-     }
- }
- */
     override func viewDidLoad() {
         super.viewDidLoad()
  
@@ -688,11 +620,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
     
     var zoomValue: CGFloat = 0.0 // 初期値（0.0 ~ 1.0 の間）
-    
-//    @objc func cameraTypeLabelTapped() {
-//        onCameraChange(1,focusChange: false)
-//        //        print("ラベルがタップされました！")
-//    }
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //        UIApplication.shared.isIdleTimerDisabled = false  // この行
@@ -701,11 +629,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         super.viewWillAppear(animated)
         UIApplication.shared.isIdleTimerDisabled = false//スリープする.監視する
         startMotionUpdates()
-//        if cameraType == 0 || cameraType == 4{
-            setFocus(focus:focusBar.value)
-//        }else{
-//            configureAutoFocus()
-//        }
+        setFocus(focus:focusBar.value)
+
         // 👇 これを追加！
         setButtonsDisplay()
     }
@@ -718,11 +643,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
     
     @objc func onZoomValueChange(){
-        if cameraType == 0 || cameraType == 4{
-            UserDefaults.standard.set(zoomBar.value, forKey: "zoomValue_front")
-        }else{
-            UserDefaults.standard.set(zoomBar.value, forKey: "zoomValue_back")
-        }
+        UserDefaults.standard.set(zoomBar.value, forKey: "zoomValue_front")
+     
         setZoom(level: zoomBar.value)
     }
     
