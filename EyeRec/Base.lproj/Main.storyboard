@@ -294,15 +294,6 @@
                                     <segue destination="eL6-VO-9Mc" kind="show" id="rOA-8I-9Va"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bD-tH-WDM">
-                                <rect key="frame" x="488" y="162" width="30" height="26"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemRedColor"/>
-                                <state key="normal" image="circle.inset.filled" catalog="system"/>
-                                <connections>
-                                    <action selector="onClickStartButton:" destination="Hp4-gK-9UW" eventType="touchUpInside" id="zgY-w5-GBI"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rQ7-Kf-AuZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -338,7 +329,6 @@
                         <outlet property="previewLabel" destination="XCs-DI-rah" id="Blx-pW-QuR"/>
                         <outlet property="previewSwitch" destination="pv5-1c-4YX" id="Wab-l4-LJB"/>
                         <outlet property="quaternionView" destination="E7F-hC-6hQ" id="fMB-sK-wwe"/>
-                        <outlet property="startButton" destination="5bD-tH-WDM" id="jTC-cZ-nLP"/>
                         <outlet property="startStopButton" destination="CjA-wt-zE0" id="mzI-9b-WMP"/>
                         <outlet property="whiteView" destination="DDK-mU-MaY" id="xpA-Av-ofx"/>
                         <outlet property="zoomBack" destination="Iz9-GX-oqr" id="E0Z-4s-TZF"/>
@@ -495,7 +485,6 @@
     <resources>
         <image name="backward.end.fill" catalog="system" width="128" height="97"/>
         <image name="circle" catalog="system" width="128" height="123"/>
-        <image name="circle.inset.filled" catalog="system" width="128" height="123"/>
         <image name="envelope.fill" catalog="system" width="128" height="85"/>
         <image name="pause.fill" catalog="system" width="114" height="128"/>
         <image name="play.fill" catalog="system" width="120" height="128"/>

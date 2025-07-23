@@ -299,7 +299,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     
     @IBOutlet weak var startStopButton: UIButton!
     @IBOutlet weak var currentTime: UILabel!
-    @IBOutlet weak var startButton: UIButton!
+//    @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var quaternionView: UIImageView!
     @IBOutlet weak var cameraView:UIImageView!
 //    @IBOutlet weak var cameraTypeLabel: UILabel!
@@ -593,7 +593,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 //        cropType = camera.getUserDefaultInt(str: "cropType", ret: 0)
 //        cropSwitch.selectedSegmentIndex = cropType
         currentTime.isHidden=true
-        startButton.isHidden=false
+  //      startButton.isHidden=false
   //      stopButton.isHidden=true
     //    stopButton.isEnabled=false
         setButtonsLocation()
@@ -932,7 +932,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             explanationLabel.isHidden=true
 //            cameraTypeLabel.isHidden=true
  //           stopButton.isHidden=false
-            startButton.isHidden=true
+   //         startButton.isHidden=true
             currentTime.isHidden=false
             previewLabel.isHidden=true
             previewSwitch.isHidden=true
@@ -959,7 +959,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         }else{//not recording
             explanationLabel.isHidden=true//false
 //            stopButton.isHidden=true
-            startButton.isHidden=false
+ ///           startButton.isHidden=false
             currentTime.isHidden=true
             playButton.isHidden=false
             listButton.isHidden=false
@@ -990,7 +990,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         }else{
             explanationLabel.text = explanationStringsE[cameraType]
         }
-        startButton.isHidden=true
+        //.isHidden=true
  //       stopButton.isHidden=true
     }
     func setFocusParts(type:Int){
@@ -1333,7 +1333,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         startStopButton.frame=CGRect(x:leftPadding+realWinWidth/2-realWinHeight*4/10,y:realWinHeight/10+topPadding,width: realWinHeight*4/5,height: realWinHeight*4/5)
         
         
-        startButton.frame=CGRect(x:x0+bw*6+sp*6-sp,y:(realWinHeight-bw)/2-sp,width: bw+2*sp,height:bw+2*sp)
+ //       startButton.frame=CGRect(x:x0+bw*6+sp*6-sp,y:(realWinHeight-bw)/2-sp,width: bw+2*sp,height:bw+2*sp)
 //        stopButton.frame=CGRect(x:x0+bw*6+sp*6-sp,y:(realWinHeight-bw)/2-sp,width: bw+2*sp,height:bw+2*sp)
 //        if someFunctions.firstLang().contains("ja"){
 //            cropSwitch.setTitle("そのまま",forSegmentAt: 0)
@@ -1454,14 +1454,14 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
     var timerCntTime = CFAbsoluteTimeGetCurrent()
     
-    @IBAction func onClickStartButton(_ sender: Any) {
+ //   @IBAction func onClickStartButton(_ sender: Any) {
 //        checkScreenUp()
 //        if cameraType == 4{
 //            cameraType4StartStop(mode:"videoStart")
 //            return
 //        }
-        startRecording(option: "default") // デフォルト引数で呼ぶ
-    }
+ //       startRecording(option: "default") // デフォルト引数で呼ぶ
+//    }
     var canStartRecording:Bool=true
     var canStopRecording:Bool=true
     func startRecording(option: String) {
@@ -1525,7 +1525,9 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             if recordingFlag==true{
                 onClickStopButton()
             }else{
-                onClickStartButton(self)
+//                onClickStartButton(self)
+                startRecording(option: "default") // デフォルト引数で呼ぶ
+
             }
         }else if cameraType==4{
             cameraType4StartStop(mode:"tap")
