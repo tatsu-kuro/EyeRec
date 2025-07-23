@@ -47,19 +47,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
  //   var cropType:Int = 0
     @IBOutlet weak var explanationLabel: UILabel!
     var tempURL:String=""
-    
-//    @IBOutlet weak var cropSwitch: UISegmentedControl!
-//    
-//    @IBAction func onCropSwitch(_ sender: UISegmentedControl) {
-//#if DEBUG
-//        print(sender.selectedSegmentIndex)
-//#endif
-//        cropType = sender.selectedSegmentIndex
-//        UserDefaults.standard.set(cropType, forKey: "cropType")
-//        onCameraChange(0,focusChange:false)
-//    }
-    
-//    @IBOutlet weak var LEDBack: UILabel!
+
     @IBOutlet weak var zoomBack: UILabel!
     @IBOutlet weak var exposeBack: UILabel!
     @IBOutlet weak var focusBack: UILabel!
@@ -262,28 +250,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 #endif
     }
     @IBAction func unwindAction(segue: UIStoryboardSegue) {
-        //        print("segueWhatRecord:",segue)
-//        if let vc1 = segue.source as? WifiViewController{
-//            let Controller:WifiViewController = vc1
-//            if Controller.stopButton.isHidden==true{//Exit
-//                //                print("Exit / not recorded")
-//            }else{
-//                //                print("Exit / recorded")
-//            }
-//            //            print("segue:","\(segue.identifier!)")
-//            cameraChangeButton.isHidden=false
-//            currentTime.isHidden=true
-//            onCameraChange(0,focusChange: false)//cameratypeを変更せず
-//            recordingFlag=false
-//            VideoManager.shared.loadVideosFromAlbum(albumName: "iCapNYS") {
-//                DispatchQueue.main.async {
-//                    //                print("ビデオ配列ロード完了：", VideoManager.shared.videoDate)
-//                    self.setPlayButtonImage()
-//                    // 必要なら次の画面へ遷移や tableView.reloadData() など
-//                }
-//                
-//            }
-//        }else
+ 
         if segue.source is ListViewController{
             startMotionUpdates()
             setPlayButtonImage()
@@ -312,27 +279,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     var timer:Timer?
     var tapFlag:Bool=false//??
     var flashFlag=false
-    
-    //    var rpk1 = Array(repeating: CGFloat(0), count:500)
-    //    var ppk1 = Array(repeating: CGFloat(0), count:500)//144*3
-    //    var facePoints:[Int] = [//x1,y1,0, x2,y2,0, x3,y3,1, x4,y4,0  の並びは   MoveTo(x1,y1)  LineTo(x2,y2)  LineTo(x3,y3)  MoveTo(x4,y4) と描画される
-    //        0,0,0, 15,0,0, 30,0,0, 45,0,0, 60,0,0, 75,0,0, 90,0,0, 105,0,0, 120,0,0, 135,0,0, 150,0,0, 165,0,0,//horizon 12
-    //        180,0,0, 195,0,0, 210,0,0, 225,0,0, 240,0,0, 255,0,0, 270,0,0, 285,0,0, 300,0,0, 315,0,0, 330,0,0, 345,0,0, 360,0,1,//horizon 12+13=25
-    //        0,0,0, 0,15,0, 0,30,0, 0,45,0, 0,60,0, 0,75,0, 0,90,0, 0,105,0, 0,120,0, 0,135,0, 0,150,0, 0,165,0,//vertical 25+12
-    //        0,180,0, 0,195,0, 0,210,0, 0,225,0, 0,240,0, 0,255,0, 0,270,0, 0,285,0, 0,300,0, 0,315,0, 0,330,0, 0,345,0, 0,360,1,//virtical 37+13=50
-    //        0,90,0, 15,90,0, 30,90,0, 45,90,0, 60,90,0, 75,90,0, 90,90,0, 105,90,0, 120,90,0, 135,90,0, 150,90,0, 165,90,0,//coronal 50+12=62
-    //        180,90,0, 195,90,0, 210,90,0, 225,90,0, 240,90,0, 255,90,0, 270,90,0, 285,90,0, 300,90,0, 315,90,0, 330,90,0, 345,90,90, 360,90,1,//coronal 62+13=75
-    //        20,-90,0, 20,-105,0, 20,-120,0, 20,-135,0, 20,-150,0, 20,-165,0, 20,-180,1,
-    //        //hair 75+7=82
-    //        -20,-90,0, -20,-105,0, -20,-120,0, -20,-135,0, -20,-150,0, -20,-165,0, -20,-180,1,//hair 82+7=89
-    //        40,-90,0, 40,-105,0, 40,-120,0, 40,-135,0, 40,-150,0, 40,-165,0, 40,-180,1,
-    //        //hair 89+7=96
-    //        -40,-90,0, -40,-105,0, -40,-120,0, -40,-135,0, -40,-150,0, -40,-165,0, -40,-180,1,//hair 96+7=103
-    //        23,-9,0, 31,-12,0, 38,-20,0, 40,-31,0, 38,-41,0, 31,-46,0, 23,-45,0, 15,-39,0, 10,-32,0, 8,-23,0, 10,-16,0, 15,-10,0, 23,-9,1,//eye +13
-    //        -23,-9,0, -31,-12,0, -38,-20,0, -40,-31,0, -38,-41,0, -31,-46,0, -23,-45,0, -15,-39,0, -10,-32,0, -8,-23,0, -10,-16,0, -15,-10,0, -23,-9,1,//eye +13
-    //        22,-26,0, 23,-25,0, 24,-24,1,//eye dots 3
-    //        -22,-26,0, -23,-25,0, -24,-24,1,//eye dots 3
-    //        -19,32,0, -14,31,0, -9,31,0, -4,31,0, 0,30,0, 4,31,0, 9,31,0, 14,31,0, 19,32,1]//mouse 9
+
     
     @IBOutlet weak var listButton: UIButton!
     @IBOutlet weak var stopButton: UIButton!
@@ -348,12 +295,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     @IBOutlet weak var exposeValueLabel: UILabel!
     @IBOutlet weak var exposeLabel: UILabel!
     @IBOutlet weak var exposeBar: UISlider!
-    
-//    @IBOutlet weak var LEDBar: UISlider!
-//    @IBOutlet weak var LEDLabel: UILabel!
-//    @IBOutlet weak var LEDValueLabel: UILabel!
-    
-    var frontCameraMode:Int = 0//0:manual 1:20s 2:90s
+
     
     @IBOutlet weak var startStopButton: UIButton!
     @IBOutlet weak var currentTime: UILabel!
@@ -645,27 +587,40 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
        //ここでscreenが上か下かチェックしてdrawHead()で頭を回転させる。
          screenUpDownLatest=screenUpDown
     }
+/*
+ override func viewDidLoad() {
+     super.viewDidLoad()
 
+     // 画面構成など軽量処理のみ
+     getPaddings()
+     setteiMode = 1
+     autoRecordMode = false
+     frontCameraMode = someFunctions.getUserDefaultInt(str: "frontCameraMode", ret: 0)
+     cameraType = 0
+     previewSwitch.isOn = (getUserDefault(str: "previewOn", ret: 0) != 0)
+
+     // 非同期で重い処理を後回し
+     DispatchQueue.global(qos: .userInitiated).async {
+         self.requestPhotoLibraryPermissionAndLoadVideos()
+         self.getCameras()
+
+         DispatchQueue.main.async {
+             // カメラ設定などUI更新があればここで
+             self.setupCameraPreview()
+         }
+     }
+ }
+ */
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        UserDefaults.standard.set(UIScreen.main.brightness, forKey: "brightness")
-        let url="http://192.168.82.1"
-        UserDefaults.standard.set(url,forKey: "urlAdress")
-  //      resetTorch()//クラッシュ時にLEDがロックされる事があるので常に念の為、チラつくが仕方ない
-        //        KalmanInit()
-        //coversは使っていないが残している。
-        //        coverTopView.isHidden=true
-        //        coverBottomView.isHidden=true
-        //        coverLeftView.isHidden=true
-        //        coverRightView.isHidden=true
-        
+ 
         getPaddings()
         setteiMode=1
         autoRecordMode=false
         
         requestPhotoLibraryPermissionAndLoadVideos()
-        frontCameraMode=someFunctions.getUserDefaultInt(str: "frontCameraMode", ret: 0)
-        getCameras()
+//        frontCameraMode=someFunctions.getUserDefaultInt(str: "frontCameraMode", ret: 0)
+//        getCameras()
         cameraType = camera.getUserDefaultInt(str: "cameraType", ret: 0)
         cameraType = 0
         if getUserDefault(str: "previewOn", ret: 0) == 0{
@@ -975,43 +930,43 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         }
         return retF
     }
-    var telephotoCamera:Bool=false
-    var ultrawideCamera:Bool=false
-    func getCameras(){//wideAngleCameraのみ使用
-        if AVCaptureDevice.default(.builtInUltraWideCamera, for: .video, position: .back) != nil{
-            ultrawideCamera=true
-        }else{
-            ultrawideCamera=false
-        }
-        //        if AVCaptureDevice.default(.builtInTelephotoCamera, for: .video, position: .back) != nil{
-        //            telephotoCamera=true
-        //        }
-        telephotoCamera=false//使用しない
-    }
-    func setButtonsFrontCameraMode(){
-        //        frontCameraMode=someFunctions.getUserDefaultInt(str: "frontCameraMode", ret: 0)
-        
-        if cameraType == 0 && setteiMode != 0{
-            //            manualButton.isHidden=true
-            //            auto20sButton.isHidden=true
-            //            auto90sButton.isHidden=true
-            //           manualButton.setTitleColor(UIColor.systemGray2,for: .normal)
-            //            auto20sButton.setTitleColor(UIColor.systemGray2,for:.normal)
-            //            auto90sButton.setTitleColor(UIColor.systemGray2,for:.normal)
-            if frontCameraMode==0{
-                //             manualButton.setTitleColor(UIColor.white,for:.normal)
-            }else if frontCameraMode==1{
-                //auto20sButton.setTitleColor(UIColor.white,for:.normal)
-            }else{
-                //               auto90sButton.setTitleColor(UIColor.white,for:.normal)
-            }
-        }else{
-            //         manualButton.isHidden=true
-            //         auto20sButton.isHidden=true
-            //         auto90sButton.isHidden=true
-        }
-        UserDefaults.standard.set(frontCameraMode, forKey: "frontCameraMode")
-    }
+//    var telephotoCamera:Bool=false
+//    var ultrawideCamera:Bool=false
+//    func getCameras(){//wideAngleCameraのみ使用
+//        if AVCaptureDevice.default(.builtInUltraWideCamera, for: .video, position: .back) != nil{
+//            ultrawideCamera=true
+//        }else{
+//            ultrawideCamera=false
+//        }
+//        //        if AVCaptureDevice.default(.builtInTelephotoCamera, for: .video, position: .back) != nil{
+//        //            telephotoCamera=true
+//        //        }
+//        telephotoCamera=false//使用しない
+//    }
+//    func setButtonsFrontCameraMode(){
+//        //        frontCameraMode=someFunctions.getUserDefaultInt(str: "frontCameraMode", ret: 0)
+//        
+//        if cameraType == 0 && setteiMode != 0{
+//            //            manualButton.isHidden=true
+//            //            auto20sButton.isHidden=true
+//            //            auto90sButton.isHidden=true
+//            //           manualButton.setTitleColor(UIColor.systemGray2,for: .normal)
+//            //            auto20sButton.setTitleColor(UIColor.systemGray2,for:.normal)
+//            //            auto90sButton.setTitleColor(UIColor.systemGray2,for:.normal)
+//            if frontCameraMode==0{
+//                //             manualButton.setTitleColor(UIColor.white,for:.normal)
+//            }else if frontCameraMode==1{
+//                //auto20sButton.setTitleColor(UIColor.white,for:.normal)
+//            }else{
+//                //               auto90sButton.setTitleColor(UIColor.white,for:.normal)
+//            }
+//        }else{
+//            //         manualButton.isHidden=true
+//            //         auto20sButton.isHidden=true
+//            //         auto90sButton.isHidden=true
+//        }
+//        UserDefaults.standard.set(frontCameraMode, forKey: "frontCameraMode")
+//    }
     //"frontCam:","wideAngleCam:","telePhotoCam","ultraWideCam:","frontCamWithVideo","wifiCam"
     let camerasIsUltraWide : Array<Int> = [0,4,1,3,0,4,1]//without wifi
     let camerasNoUltraWide : Array<Int> = [0,4,1,0,4,1,0]//without wifi
@@ -1020,25 +975,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     func cameraChange(_ cameraType:Int,incDec: Int)->Int{
         var type = cameraType
         //WiFiCamera使用しないときは上のcamerasIs?????:Arrayを変更し、下記３行を追加、
-        if type==5{//以前のバージョンでwifi Cameraに設定されていた場合
-            type=0
-        }
-        if ultrawideCamera == true{
-            for i in 1...5{
-                if camerasIsUltraWide[i]==type{
-                    return camerasIsUltraWide[i+incDec]
-                }
-            }
+      
+  
             return 0
-        }else{
-            for i in 1...5{
-                if camerasNoUltraWide[i]==type{
-                    return camerasNoUltraWide[i+incDec]
-                }
-            }
-            return 0
-        }
-        
+      
     }
     //"frontCam:","wideAngleCam:","telePhotoCam","ultraWideCam:","frontCamWithVideo","wifiCam"
     let cameraTypeStrings : Array<String> = ["フロント\nカメラ\n\n","背面\nカメラ1\n\n","teleP","背面\nカメラ2\n\n","解説付\n自動90秒\n\n","WiFi\nカメラ\n\n"]
@@ -1051,7 +991,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         getPaddings()
         setButtonsLocation()
         
-        setButtonsFrontCameraMode()
+//        setButtonsFrontCameraMode()
         setPreviewLabel()
         zoomParts(hide: false)
         exposeParts(hide: false)
