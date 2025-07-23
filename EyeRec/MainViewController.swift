@@ -282,7 +282,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
     
     @IBOutlet weak var listButton: UIButton!
-    @IBOutlet weak var stopButton: UIButton!
+//    @IBOutlet weak var stopButton: UIButton!
     
     @IBOutlet weak var focusLabel: UILabel!
     @IBOutlet weak var focusBar: UISlider!
@@ -594,8 +594,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 //        cropSwitch.selectedSegmentIndex = cropType
         currentTime.isHidden=true
         startButton.isHidden=false
-        stopButton.isHidden=true
-        stopButton.isEnabled=false
+  //      stopButton.isHidden=true
+    //    stopButton.isEnabled=false
         setButtonsLocation()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
@@ -931,7 +931,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             hideButtonsSlides()
             explanationLabel.isHidden=true
 //            cameraTypeLabel.isHidden=true
-            stopButton.isHidden=false
+ //           stopButton.isHidden=false
             startButton.isHidden=true
             currentTime.isHidden=false
             previewLabel.isHidden=true
@@ -944,7 +944,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
                 quaternionView.alpha=0.0
                 cameraView.alpha=0.3
                 currentTime.alpha=0.001//0.1
-                stopButton.alpha=0.03
+  //              stopButton.alpha=0.03
             }else{
                 if cameraType==4{
                     startStopButton.alpha=0.015
@@ -954,11 +954,11 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
                 currentTime.alpha=1
                 cameraView.alpha=1
                 quaternionView.alpha=1
-                stopButton.alpha=1.0
+//                stopButton.alpha=1.0
             }
         }else{//not recording
             explanationLabel.isHidden=true//false
-            stopButton.isHidden=true
+//            stopButton.isHidden=true
             startButton.isHidden=false
             currentTime.isHidden=true
             playButton.isHidden=false
@@ -991,7 +991,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             explanationLabel.text = explanationStringsE[cameraType]
         }
         startButton.isHidden=true
-        stopButton.isHidden=true
+ //       stopButton.isHidden=true
     }
     func setFocusParts(type:Int){
         if type==2 {//auto
@@ -1334,7 +1334,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         
         
         startButton.frame=CGRect(x:x0+bw*6+sp*6-sp,y:(realWinHeight-bw)/2-sp,width: bw+2*sp,height:bw+2*sp)
-        stopButton.frame=CGRect(x:x0+bw*6+sp*6-sp,y:(realWinHeight-bw)/2-sp,width: bw+2*sp,height:bw+2*sp)
+//        stopButton.frame=CGRect(x:x0+bw*6+sp*6-sp,y:(realWinHeight-bw)/2-sp,width: bw+2*sp,height:bw+2*sp)
 //        if someFunctions.firstLang().contains("ja"){
 //            cropSwitch.setTitle("そのまま",forSegmentAt: 0)
 //            cropSwitch.setTitle("切取 １",forSegmentAt: 1)
@@ -1358,7 +1358,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         UIScreen.main.brightness = CGFloat(UserDefaults.standard.double(forKey: "brightness"))
         // 完全に復帰したとき（ユーザーが操作可能になった）
     }
-    @IBAction func onClickStopButton(_ sender: Any) {
+    func onClickStopButton() {
         guard canStopRecording else {
             //               print("⚠️ 録画開始後1秒以内。録画停止ブロック中。")
             return
@@ -1505,14 +1505,14 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             quaternionView.isHidden=true
             cameraView.isHidden=true
             currentTime.alpha=0.001//0.1
-            if cameraType==4{
-                stopButton.alpha=0.03
-            }
+//            if cameraType==4{
+//                stopButton.alpha=0.03
+//            }
         }
         
         try? FileManager.default.removeItem(atPath: TempFilePath)
         //      startRecord()
-        stopButton.isEnabled=true
+//        stopButton.isEnabled=true
         recordingFlag=true
         
         fileWriter!.startWriting()
@@ -1523,7 +1523,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     @IBAction func onClickedStartStopButton(_ sender: Any) {
         if cameraType==0{
             if recordingFlag==true{
-                onClickStopButton(self)
+                onClickStopButton()
             }else{
                 onClickStartButton(self)
             }
@@ -1545,7 +1545,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             return
         }
         cameraType4_mode="none"//
-        onClickStopButton(0)
+        onClickStopButton()
     }
     @objc func playerDidFinishPlaying(notification: Notification) {
         guard let item = notification.object as? AVPlayerItem,
@@ -1576,7 +1576,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             recordingFlag=false
             playMoviePath(Locale.preferredLanguages.first?.hasPrefix("ja") == true ? "positional":"positional_eng")
             quaternionView.isHidden=true
-            stopButton.isEnabled=true
+  //          stopButton.isEnabled=true
             currentTime.alpha=0.001
         }else if cameraType4_mode=="videoPlaying"{//ビデオ再生中に呼ばれたら、ビデオを止めて音声ファイル再生
             stopAndDisposePlayer()
@@ -1614,7 +1614,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             isManuallySoundStopped = true
             soundPlayer?.stop()
             //             isManuallySoundStopped = true
-            onClickStopButton(0)
+            onClickStopButton()
         }else if cameraType4_mode=="audioPlaying"{//音声ファイル再生中に呼ばれたら
             cameraType4_mode="recording"
             soundPlayer?.currentTime=10

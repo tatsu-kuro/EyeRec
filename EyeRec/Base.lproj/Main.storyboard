@@ -308,9 +308,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemOrangeColor"/>
                                 <state key="normal" image="stop.circle" catalog="system"/>
-                                <connections>
-                                    <action selector="onClickStopButton:" destination="Hp4-gK-9UW" eventType="touchUpInside" id="Yva-hP-8Do"/>
-                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rQ7-Kf-AuZ"/>
@@ -349,7 +346,6 @@
                         <outlet property="quaternionView" destination="E7F-hC-6hQ" id="fMB-sK-wwe"/>
                         <outlet property="startButton" destination="5bD-tH-WDM" id="jTC-cZ-nLP"/>
                         <outlet property="startStopButton" destination="CjA-wt-zE0" id="mzI-9b-WMP"/>
-                        <outlet property="stopButton" destination="Pah-7o-hki" id="kyy-dz-Q1b"/>
                         <outlet property="whiteView" destination="DDK-mU-MaY" id="xpA-Av-ofx"/>
                         <outlet property="zoomBack" destination="Iz9-GX-oqr" id="E0Z-4s-TZF"/>
                         <outlet property="zoomBar" destination="be6-mz-8db" id="Vil-nb-39p"/>
