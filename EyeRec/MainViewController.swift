@@ -302,10 +302,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var quaternionView: UIImageView!
     @IBOutlet weak var cameraView:UIImageView!
-    @IBOutlet weak var cameraTypeLabel: UILabel!
+//    @IBOutlet weak var cameraTypeLabel: UILabel!
     @IBOutlet weak var whiteView: UIImageView!
     
-    @IBOutlet weak var cameraChangeButton: UIButton!
+//    @IBOutlet weak var cameraChangeButton: UIButton!
     
     func setZoom(level:Float){//0.0-0.1
         zoomBar.value=level
@@ -920,7 +920,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         cameraView.isHidden=false
         quaternionView.isHidden=false
         if cameraType == 5{//cameraType:5
-            cameraChangeButton.isHidden=false
+//            cameraChangeButton.isHidden=false
             currentTime.isHidden=true
             cameraView.isHidden=true
             quaternionView.isHidden=true
@@ -930,19 +930,15 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         if recordingFlag==true {
             hideButtonsSlides()
             explanationLabel.isHidden=true
-            cameraTypeLabel.isHidden=true
+//            cameraTypeLabel.isHidden=true
             stopButton.isHidden=false
             startButton.isHidden=true
             currentTime.isHidden=false
             previewLabel.isHidden=true
             previewSwitch.isHidden=true
             playButton.isHidden=true
-            cameraChangeButton.isHidden=true
-            //            cameraChangeBack.isHidden=true
             listButton.isHidden=true
             helpButton.isHidden=true
-//            cropSwitch.isHidden=true
-//            LEDParts(hide: true)
             if cameraType == 0{
                 startStopButton.alpha=0.015
                 quaternionView.alpha=0.0
@@ -962,13 +958,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             }
         }else{//not recording
             explanationLabel.isHidden=true//false
-            cameraTypeLabel.isHidden=true//false
             stopButton.isHidden=true
             startButton.isHidden=false
             currentTime.isHidden=true
             playButton.isHidden=false
-            cameraChangeButton.isHidden=true//false
-            //            cameraChangeBack.isHidden=false
             listButton.isHidden=false
             currentTime.alpha=1
             cameraView.alpha=1
@@ -976,9 +969,6 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             zoomParts(hide: false)
             exposeParts(hide: true)//false)
             focusParts(hide: false)
-//            LEDParts(hide: true)//false)
-//            cropSwitch.isHidden=true//false
-//            cropSwitch.isEnabled=true
             helpButton.isHidden=false
             if focusChangeable==false{
                 setFocusParts(type: 0)
@@ -989,31 +979,15 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
                 focusParts(hide: true)
                 zoomParts(hide: true)
                 exposeParts(hide: true)
-//                LEDParts(hide: true)
-//                cropSwitch.isHidden=true
             }else if cameraType==0||cameraType==4{//front camera
-//                LEDParts(hide: true)
                 startStopButton.alpha=1.0
-//                cropSwitch.isEnabled=false
-//                cropSwitch.alpha=0.4
-//                if focusChangeable==false{
-//                    setFocusParts(type: 0)
-//                }else{
-//                    setFocusParts(type:1)
-//                }
             }else{//back camera
-//                LEDParts(hide: true)//false)
                 startStopButton.alpha=0
- //               setFocusParts(type:2)//0:fixed 1:manual 2:auto
-//                cropSwitch.isEnabled=false//true
-//                cropSwitch.alpha=0//1
             }
         }
         if someFunctions.firstLang().contains("ja"){
-            cameraTypeLabel.text = cameraTypeStrings[cameraType]
             explanationLabel.text = explanationStrings[cameraType]
         }else{
-            cameraTypeLabel.text = cameraTypeStringsE[cameraType]
             explanationLabel.text = explanationStringsE[cameraType]
         }
         startButton.isHidden=true
@@ -1342,8 +1316,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         exposeBack.backgroundColor = UIColor.systemGray5
         //
         camera.setButtonProperty(helpButton,x:x0+bw*6+sp*6,y:by1/*by-bh-sp*/,w:bw,h:bh,UIColor.darkGray,0)
-        camera.setButtonProperty(cameraChangeButton,x:x0+bw*6+sp*6,y:by1,w:bw,h:bh,UIColor.darkGray,0)
-        camera.setLabelProperty(cameraTypeLabel,x:x0+bw*6+sp*6,y:by,w:bw,h:bh*2+sp,UIColor.darkGray,0)
+//        camera.setButtonProperty(cameraChangeButton,x:x0+bw*6+sp*6,y:by1,w:bw,h:bh,UIColor.darkGray,0)
+//        camera.setLabelProperty(cameraTypeLabel,x:x0+bw*6+sp*6,y:by,w:bw,h:bh*2+sp,UIColor.darkGray,0)
         //        cameraChangeBack.frame=CGRect(x:x0+bw*6+sp*6,y:cameraTypeLabel.frame.minY+bh/2,width:bw,height:bh)
         //        setProperty(label: currentTime, radius: 4)
         
@@ -1475,7 +1449,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         zoomParts(hide:true)
         exposeParts(hide:true)
         focusParts(hide:true)
-        cameraChangeButton.isHidden=true
+//        cameraChangeButton.isHidden=true
         currentTime.isHidden=false
     }
     var timerCntTime = CFAbsoluteTimeGetCurrent()
