@@ -270,8 +270,31 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     @IBOutlet weak var quaternionView: UIImageView!
     @IBOutlet weak var cameraView:UIImageView!
     @IBOutlet weak var whiteView: UIImageView!
-    
-    func setZoom(level:Float){//0.0-0.1
+
+    func setZoom(level: Float) { // level: 0.0 ～ 1.0（スライダー値）
+        zoomBar.value = level
+
+    #if DEBUG
+        print("setZoom*****:", level)
+    #endif
+
+        if let device = videoDevice {
+            // 表示用：1.0～6.0倍に変換した倍率を1000倍（例: 2.5倍 → 2500）して表示
+            let zoomFactor = 1.0 + CGFloat(level) * (min(6.0, device.maxAvailableVideoZoomFactor) - 1.0)
+            zoomValueLabel.text = String(format: "%.1f×", zoomFactor)
+
+            do {
+                try device.lockForConfiguration()
+                device.ramp(toVideoZoomFactor: zoomFactor, withRate: 30.0)
+                device.unlockForConfiguration()
+            } catch {
+    #if DEBUG
+                print("Failed to change zoom.")
+    #endif
+            }
+        }
+    }
+/*    func setZoom(level:Float){//0.0-0.1
         zoomBar.value=level
 #if DEBUG
         print("setZoom*****:",level)
@@ -291,7 +314,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 #endif
             }
         }
-    }
+    }*/
     var focusChangeable:Bool=true
     func setFocus(focus:Float) {//focus 0:最接近　0-1.0
         focusChangeable=false
@@ -489,7 +512,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             exposeValue=exposeValue//.getでgetDefaultしてその値を.setする。.setでsetExposeしそこでexposeValue表示
         }
         zoomBar.minimumValue = 0
-        zoomBar.maximumValue = 0.2
+        zoomBar.maximumValue = 1.0
         zoomBar.addTarget(self, action: #selector(onZoomValueChange), for: UIControl.Event.valueChanged)
         setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_front", ret: 0.0))
         
