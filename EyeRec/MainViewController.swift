@@ -27,7 +27,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     let camera = MyFunctions()
     var cameraType:Int = 0
  //   var cropType:Int = 0
-    @IBOutlet weak var explanationLabel: UILabel!
+//    @IBOutlet weak var explanationLabel: UILabel!
     var tempURL:String=""
 
     @IBOutlet weak var zoomBack: UILabel!
@@ -267,13 +267,9 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     
     @IBOutlet weak var startStopButton: UIButton!
     @IBOutlet weak var currentTime: UILabel!
-//    @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var quaternionView: UIImageView!
     @IBOutlet weak var cameraView:UIImageView!
-//    @IBOutlet weak var cameraTypeLabel: UILabel!
     @IBOutlet weak var whiteView: UIImageView!
-    
-//    @IBOutlet weak var cameraChangeButton: UIButton!
     
     func setZoom(level:Float){//0.0-0.1
         zoomBar.value=level
@@ -374,7 +370,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
  
     @IBAction func onFocusBarTouchUpInside(_ sender: Any) {
         if cameraType==0 || cameraType==4{
-            explanationLabel.isHidden=false
+//            explanationLabel.isHidden=false
             setZoom(level: Float(zoomValue))
             onCameraChange(focusChange: false)
             startStopButton.alpha=1.0
@@ -383,7 +379,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     @IBAction func onFocusBarTouchDown(_ sender: Any) {
         if cameraType==0{
             onCameraChange(focusChange: true)
-            explanationLabel.isHidden=true
+//            explanationLabel.isHidden=true
             startStopButton.alpha=0
         }
     }
@@ -502,6 +498,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         exposeBar.addTarget(self, action: #selector(onExposeValueChange), for: UIControl.Event.valueChanged)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.startMotionUpdates()
+            self.onCameraChange(focusChange: false)
         }
     }
     
@@ -767,34 +764,19 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
         if recordingFlag==true {
             hideButtonsSlides()
-            explanationLabel.isHidden=true
+//            explanationLabel.isHidden=true
 
             currentTime.isHidden=false
-
+            
             playButton.isHidden=true
             listButton.isHidden=true
             helpButton.isHidden=true
-            if cameraType == 0{
-                startStopButton.alpha=0.015
-                quaternionView.alpha=0.0
-                cameraView.alpha=0.3
-                currentTime.alpha=0.001//0.1
-  //              stopButton.alpha=0.03
-            }else{
-                if cameraType==4{
-                    startStopButton.alpha=0.015
-                }else{
-                    startStopButton.alpha=0.0
-                }
-                currentTime.alpha=1
-                cameraView.alpha=1
-                quaternionView.alpha=1
-//                stopButton.alpha=1.0
-            }
-        }else{//not recording
-            explanationLabel.isHidden=true//false
-//            stopButton.isHidden=true
- ///           startButton.isHidden=false
+            startStopButton.alpha=0.015
+            quaternionView.alpha=0.0
+            cameraView.alpha=0.3
+            currentTime.alpha=0.001//0.1
+          }else{//not recording
+//            explanationLabel.isHidden=true//false
             currentTime.isHidden=true
             playButton.isHidden=false
             listButton.isHidden=false
@@ -820,13 +802,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
                 startStopButton.alpha=0
             }
         }
-//        if someFunctions.firstLang().contains("ja"){
-//            explanationLabel.text = explanationStrings[cameraType]
-//        }else{
-//            explanationLabel.text = explanationStringsE[cameraType]
-//        }
-        //.isHidden=true
- //       stopButton.isHidden=true
+
     }
     func setFocusParts(type:Int){
         if type==2 {//auto
@@ -834,17 +810,12 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             focusValueLabel.isHidden=true
             focusLabel.isHidden=true
             focusBack.text=""//!=someFunctions.firstLang().contains("ja") ? "自動焦点":"Autofocus"
-//            LEDBar.isHidden=false
-//            LEDValueLabel.isHidden=false
-//            LEDLabel.isHidden=false
+
         }else if type==1{//manual
             focusBar.isHidden=false
             focusValueLabel.isHidden=false
             focusLabel.isHidden=false
             focusBack.text!=""
-         //   LEDBar.isHidden=true
-         //   LEDValueLabel.isHidden=true
-         //   LEDLabel.isHidden=true
         }else{//fixed focus
             focusBar.isHidden=true
             focusValueLabel.isHidden=true
@@ -939,9 +910,9 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         let height=view.bounds.height
         
         let videoLayer : AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        if !focusChange && (cameraType == 0 || cameraType == 4){//拡大した部分は隠す
+        if !focusChange{//} && (cameraType == 0 || cameraType == 4){//拡大した部分は隠す
             videoLayer.frame = CGRect(x:leftPadding+10,y:height*2.5/6,width:height*(16/9)/6,height:height/6)
-        }else{//backCamera　拡大した部分は表示されない
+        }else{
                 videoLayer.frame=self.view.bounds
         }
         videoLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
@@ -1024,7 +995,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         let by1 = realWinHeight - bh - sp// - bh*2/3//-height
         let by = realWinHeight - (bh+sp)*2// - bh*2/3//-height
         let x0=leftPadding+sp*2
-         explanationLabel.frame=CGRect(x:x0,y:sp,width:realWinWidth-sp*4,height: zoomLabel.frame.minY-sp)
+//         explanationLabel.frame=CGRect(x:x0,y:sp,width:realWinWidth-sp*4,height: zoomLabel.frame.minY-sp)
         focusBar.frame = CGRect(x:x0+bw*4+sp*4, y: by1, width:bw*2+sp, height: bh)
          camera.setLabelProperty(focusBack,x:x0+bw*4+sp*4,y:by1,w:bw*2+sp,h:bh,UIColor.systemGray6,1)
         camera.setLabelProperty(focusLabel,x:x0+bw*3+sp*3,y:by1,w:bw,h:bh,UIColor.white)
@@ -1125,12 +1096,14 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         zoomLabel.isHidden=hide
         zoomValueLabel.isHidden=hide
         zoomBack.isHidden=hide
+        zoomBack.text = ""
     }
     func exposeParts(hide:Bool){
         exposeBar.isHidden=hide
         exposeLabel.isHidden=hide
         exposeValueLabel.isHidden=hide
         exposeBack.isHidden=hide
+        exposeBack.text=""
     }
     func focusParts(hide:Bool){
         focusLabel.isHidden=hide
@@ -1161,10 +1134,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             //            print("✅ 1秒経過：録画停止可能に")
         }
         UserDefaults.standard.set(UIScreen.main.brightness, forKey: "brightness")
-        if cameraType == 0 || cameraType == 4{
-            UIScreen.main.brightness = CGFloat(1.0)
-            explanationLabel.isHidden=true
-        }
+        UIScreen.main.brightness = CGFloat(1.0)
+
         timerCnt=0
         timerCntTime=CFAbsoluteTimeGetCurrent()
         currentTime.text="0:00"
