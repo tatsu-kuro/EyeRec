@@ -89,25 +89,7 @@ class How2ViewController: UIViewController {
         labelOnScrollView.sizeToFit()
   //以下は2個目の画像を使うときのために、コメントアウトして残しておく
         labelOnScrollView2.text=""
- /*
-        // imageViewOnScrollView2（2枚目の画像）
-        let img2 = UIImage(named: "fix3")!
-        let imgW2 = img2.size.width
-        let imgH2 = img2.size.height
-        let imageHeight2 = ww * imgH2 / imgW2
-        let image2 = img2.resize(size: CGSize(width: ww, height: imageHeight2))
-        let image2Y = labelOnScrollView.frame.maxY + sp
-        imageViewOnScrollView2.frame = CGRect(x: sp, y: image2Y, width: ww - 2 * sp, height: imageHeight2)
-        imageViewOnScrollView2.image = image2
-        
-        // labelOnScrollView2（画像2の説明）
-        labelOnScrollView2.text = someFunctions.firstLang().contains("ja") ? getTextJa() : getTextEn()
-        labelOnScrollView2.numberOfLines = 0
-        labelOnScrollView2.font = UIFont.systemFont(ofSize: 20)
-        let label2Y = imageViewOnScrollView2.frame.maxY + sp
-        labelOnScrollView2.frame = CGRect(x: sp, y: label2Y, width: ww - 2 * sp, height: 0)
-        labelOnScrollView2.sizeToFit()
- */
+ 
         // scrollView 全体の高さを更新
 //        scrollView.contentSize = CGSize(width: ww, height: labelOnScrollView2.frame.maxY + 2 * sp)
         scrollView.contentSize = CGSize(width: ww, height: labelOnScrollView.frame.maxY + 2 * sp)

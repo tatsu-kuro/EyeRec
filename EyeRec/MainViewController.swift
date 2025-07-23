@@ -13,25 +13,7 @@ import CoreMotion
 import VideoToolbox
 import CoreML
 import AssetsLibrary
-//enum ScreenOrientation {
-//    case faceUp    // 上向き or 真横
-//    case faceDown  // 少しでも下向き
-//}
-//
-//extension CMQuaternion {
-//    /// スクリーンが少しでも下向きなら .faceDown、それ以外（上向きまたは横向き）は .faceUp を返す
-//    func screenOrientationTreatingSideAsUp() -> ScreenOrientation {
-//        let q0 = self.w
-//        let q1 = self.x
-//        let q2 = self.y
-//        let q3 = self.z
-//
-//        // スクリーンの -Z軸（法線ベクトル）の Z成分
-//        let zZ = q0 * q0 - q1 * q1 - q2 * q2 + q3 * q3
-//
-//        return zZ >= 0 ? .faceUp : .faceDown
-//    }
-//}
+
 extension UIColor {
     func image(size: CGSize) -> UIImage {
         return UIGraphicsImageRenderer(size: size).image { rendererContext in
