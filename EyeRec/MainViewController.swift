@@ -499,14 +499,14 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         realWinHeight=view.bounds.height-topPadding-bottomPadding/2
     }
     
-    @IBAction func cameraTypeLabelLongPress(_ sender: UILongPressGestureRecognizer) {
-#if DEBUG
-        print("longbutton****")
-#endif
-        if sender.state == .ended{
-            onCameraChange(-1,focusChange: false)
-        }
-    }
+//    @IBAction func cameraTypeLabelLongPress(_ sender: UILongPressGestureRecognizer) {
+//#if DEBUG
+//        print("longbutton****")
+//#endif
+//        if sender.state == .ended{
+//            onCameraChange(-1,focusChange: false)
+//        }
+//    }
     
 //    @IBAction func onFocusBarTouchUpOutside(_ sender: Any) {//通っていない感じ
 //        print("touchupoutside")
@@ -711,38 +711,15 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         stopButton.isEnabled=false
         setButtonsLocation()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(cameraTypeLabelTapped))
-        cameraTypeLabel.addGestureRecognizer(tapGesture)
-        cameraTypeLabel.isUserInteractionEnabled = true
-        // 長押しジェスチャーを作成
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(cameraTypeLabelLongPress(_:)))
-        longPressGesture.minimumPressDuration = 0.3 // 0.3秒以上の長押し
-        cameraTypeLabel.addGestureRecognizer(longPressGesture)
-        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
-            if cameraType==0 || cameraType==4{
-                setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_front", ret: 0.0))
-            }else{
-                setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_back", ret: 0.0))
-            }
+            setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_front", ret: 0.0))
             exposeValue=exposeValue//.getでgetDefaultしてその値を.setする。.setでsetExposeしそこでexposeValue表示
-  //          onLEDValueChange()
-            //            print("画面が表示されて0.1秒後に1回だけ実行")
         }
         zoomBar.minimumValue = 0
         zoomBar.maximumValue = 0.02
         zoomBar.addTarget(self, action: #selector(onZoomValueChange), for: UIControl.Event.valueChanged)
-        if cameraType==0 || cameraType==4{
- //           zoomBar.value = camera.getUserDefaultFloat(str: "zoomValue_front", ret: 0.0)
-            setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_front", ret: 0.0))
-
-        }else{
- //           zoomBar.value = camera.getUserDefaultFloat(str: "zoomValue_back", ret: 0.0)
-            setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_back", ret: 0.0))
-
-        }
-//        zoomBar.value = camera.getUserDefaultFloat(str: "zoomValue", ret: 0.0)
-//        setZoom(level: zoomBar.value)
+        setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_front", ret: 0.0))
+        
         exposeBar.minimumValue = Float(videoDevice!.minExposureTargetBias)/2.0
         exposeBar.maximumValue = Float(videoDevice!.maxExposureTargetBias)
         exposeBar.addTarget(self, action: #selector(onExposeValueChange), for: UIControl.Event.valueChanged)
@@ -757,10 +734,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     
     var zoomValue: CGFloat = 0.0 // 初期値（0.0 ~ 1.0 の間）
     
-    @objc func cameraTypeLabelTapped() {
-        onCameraChange(1,focusChange: false)
-        //        print("ラベルがタップされました！")
-    }
+//    @objc func cameraTypeLabelTapped() {
+//        onCameraChange(1,focusChange: false)
+//        //        print("ラベルがタップされました！")
+//    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         //        UIApplication.shared.isIdleTimerDisabled = false  // この行
@@ -1259,43 +1236,19 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         cameraType = camera.getUserDefaultInt(str: "cameraType", ret: 0)
         
         cameraType = cameraChange(cameraType,incDec: incDec)
+        cameraType = 0
         UserDefaults.standard.set(cameraType, forKey: "cameraType")
-        
-        if cameraType == 5{//wifi
-            setButtonsDisplay()
-            focusParts(hide: true)
-//            LEDParts(hide: true)
-            captureSession.stopRunning()
-            return
-        }
         
         captureSession.stopRunning()
         set_rpk_ppk()
         initSession(fps: 60,focusChange: focusChange)
-        
-        
- //       onLEDValueChange()
-//        if cameraType == 0 || cameraType == 4{
-            setFocus(focus:focusBar.value)
-//        }else{
-//            configureAutoFocus()
-//        }
-        
-        if cameraType == 0 || cameraType == 4{
-            focusBar.value=UserDefaults.standard.float(forKey: "focusValue_front")
-//            focusParts(hide: false)
-        }else{
- //           focusBar.value=UserDefaults.standard.float(forKey: "focusValue_back")
-//            focusParts(hide: true)
-        }
+  
+        focusBar.value=UserDefaults.standard.float(forKey: "focusValue_front")
+
         setFocus(focus: focusBar.value)
         setButtonsDisplay()
         exposeValue=exposeValue//getDefaultしてその値をsetする。setでsetExposeしそこでexposeValue表示
-        if cameraType == 0 || cameraType == 4{
-            setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_front", ret: 0))
-        }else{
-            setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_back", ret: 0))
-        }
+        setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_front", ret: 0))
     }
     
     func initSession(fps:Double,focusChange:Bool) {
