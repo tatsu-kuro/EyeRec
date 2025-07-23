@@ -356,44 +356,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             }
         }
     }
-    func setFlashlevel(level:Float){
-        if cameraType != 0 && cameraType != 4{
-            if let device = videoDevice{
-                do {
-                    if device.hasTorch {
-                        do {
-                            // torch device lock on
-                            try device.lockForConfiguration()
-                            
-                            if (level > 0.0){
-                                do {
-                                    try device.setTorchModeOn(level: level)
-                                } catch {
-#if DEBUG
-                                    print("error")
-#endif
-                                }
-                                
-                            } else {
-                                // flash LED OFF
-                                // 注意しないといけないのは、0.0はエラーになるのでLEDをoffさせます。
-                                device.torchMode = AVCaptureDevice.TorchMode.off
-                            }
-                            // torch device unlock
-                            device.unlockForConfiguration()
-                            
-                        } catch {
-#if DEBUG
-                            print("Torch could not be used")
-#endif
-                        }
-                    }
-                }
-            }
-        }else{//front camera
-            
-        }
-    }
+ 
     
     func killTimer(){
         if timer?.isValid == true {
@@ -480,11 +443,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
     @IBAction func onFocusBarChanged(_ sender: UISlider) {
         setFocus(focus:focusBar.value)
-        if cameraType==0 || cameraType==4{
-            UserDefaults.standard.set(focusBar.value, forKey: "focusValue_front")
-        }else{
-            UserDefaults.standard.set(focusBar.value, forKey: "focusValue_back")
-        }
+        UserDefaults.standard.set(focusBar.value, forKey: "focusValue_front")
     }
 
     var screenUpDown:Bool=false
@@ -553,7 +512,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         requestPhotoLibraryPermissionAndLoadVideos()
 //        frontCameraMode=someFunctions.getUserDefaultInt(str: "frontCameraMode", ret: 0)
 //        getCameras()
-        cameraType = camera.getUserDefaultInt(str: "cameraType", ret: 0)
+//        cameraType = camera.getUserDefaultInt(str: "cameraType", ret: 0)
         cameraType = 0
         if getUserDefault(str: "previewOn", ret: 0) == 0{
             previewSwitch.isOn=false
@@ -575,17 +534,9 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 //        }
         focusBar.minimumValue = 0
         focusBar.maximumValue = 1.0
-        if cameraType == 0 || cameraType == 4{
-            focusBar.value=camera.getUserDefaultFloat(str: "focusValue_front", ret: 0)
-        }else{
-            focusBar.value=camera.getUserDefaultFloat(str: "focusValue_back", ret: 0)
-        }
+        focusBar.value=camera.getUserDefaultFloat(str: "focusValue_front", ret: 0)
         setFocus(focus:focusBar.value)
 
-        if cameraType == 5{
-            cameraView.isHidden=true
-            captureSession.stopRunning()
-        }
         exposeValue=exposeValue//getDefaultしてその値をsetする。setでsetExposeしそこでexposeValue表示
         currentTime.isHidden=true
           setButtonsLocation()
@@ -667,7 +618,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }()
     func set_rpk_ppk() {
         let faceRadius: CGFloat = 40
-        let frontBackOffset = (cameraType == 0 || cameraType == 4) ? 180 : 0
+        let frontBackOffset = 180
         let count = facePoints.count / 3
         
         for i in 0..<count {
@@ -722,7 +673,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         for i in 0..<(facePoints.count / 3) {
             let x0 = ppk1[i * 3]
             let y0 = ppk1[i * 3 + 1]
-            let z0 = (cameraType == 0 || cameraType == 4) ? -ppk1[i * 3 + 2] : ppk1[i * 3 + 2]
+            let z0 = -ppk1[i * 3 + 2]
             
             var q0 = qOld0, q1 = qOld1, q2 = qOld2, q3 = qOld3
             let mag = sqrt(q0*q0 + q1*q1 + q2*q2 + q3*q3)
@@ -754,8 +705,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             let y = rotatedPoints[i * 3 + 2] * radius / defaultRadius
             let behind = rotatedPoints[i * 3 + 1] < backThreshold
 
-            let xSign: CGFloat = (cameraType == 4 || cameraType == 0) == screenUpDownLatest ? 1 : -1
-            let ySign: CGFloat = (cameraType == 4 || cameraType == 0) == screenUpDownLatest ? -1 : 1
+            let xSign: CGFloat = screenUpDownLatest ? 1 : -1
+            let ySign: CGFloat = screenUpDownLatest ? -1 : 1
             let point = CGPoint(x: faceCenter.x + x * xSign, y: faceCenter.y + y * ySign)
             if moveToNext || behind {
                 path.move(to: point)
@@ -818,9 +769,9 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
                 let dimensions = CMVideoFormatDescriptionGetDimensions(description)  // 幅・高さ情報を抜き出す
                 iCapNYSWidth = dimensions.width
                 iCapNYSHeight = dimensions.height
-                if cameraType == 0{//訳がわからないがこれで上手くいく、反則行為
+              //  if cameraType == 0{//訳がわからないがこれで上手くいく、反則行為
                     iCapNYSHeight=720
-                }
+            //    }
                 iCapNYSFPS = desiredFps
 #if DEBUG
                 print("フォーマット・フレームレートを設定 : \(desiredFps) fps・\(iCapNYSWidth) px x \(iCapNYSHeight) px")
@@ -844,44 +795,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         }
         return retF
     }
-//    var telephotoCamera:Bool=false
-//    var ultrawideCamera:Bool=false
-//    func getCameras(){//wideAngleCameraのみ使用
-//        if AVCaptureDevice.default(.builtInUltraWideCamera, for: .video, position: .back) != nil{
-//            ultrawideCamera=true
-//        }else{
-//            ultrawideCamera=false
-//        }
-//        //        if AVCaptureDevice.default(.builtInTelephotoCamera, for: .video, position: .back) != nil{
-//        //            telephotoCamera=true
-//        //        }
-//        telephotoCamera=false//使用しない
-//    }
-//    func setButtonsFrontCameraMode(){
-//        //        frontCameraMode=someFunctions.getUserDefaultInt(str: "frontCameraMode", ret: 0)
-//        
-//        if cameraType == 0 && setteiMode != 0{
-//            //            manualButton.isHidden=true
-//            //            auto20sButton.isHidden=true
-//            //            auto90sButton.isHidden=true
-//            //           manualButton.setTitleColor(UIColor.systemGray2,for: .normal)
-//            //            auto20sButton.setTitleColor(UIColor.systemGray2,for:.normal)
-//            //            auto90sButton.setTitleColor(UIColor.systemGray2,for:.normal)
-//            if frontCameraMode==0{
-//                //             manualButton.setTitleColor(UIColor.white,for:.normal)
-//            }else if frontCameraMode==1{
-//                //auto20sButton.setTitleColor(UIColor.white,for:.normal)
-//            }else{
-//                //               auto90sButton.setTitleColor(UIColor.white,for:.normal)
-//            }
-//        }else{
-//            //         manualButton.isHidden=true
-//            //         auto20sButton.isHidden=true
-//            //         auto90sButton.isHidden=true
-//        }
-//        UserDefaults.standard.set(frontCameraMode, forKey: "frontCameraMode")
-//    }
-    //"frontCam:","wideAngleCam:","telePhotoCam","ultraWideCam:","frontCamWithVideo","wifiCam"
+
     let camerasIsUltraWide : Array<Int> = [0,4,1,3,0,4,1]//without wifi
     let camerasNoUltraWide : Array<Int> = [0,4,1,0,4,1,0]//without wifi
     //    let camerasIsUltraWide : Array<Int> = [0,4,1,3,5,0,4,1]
@@ -895,12 +809,12 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
       
     }
     //"frontCam:","wideAngleCam:","telePhotoCam","ultraWideCam:","frontCamWithVideo","wifiCam"
-    let cameraTypeStrings : Array<String> = ["フロント\nカメラ\n\n","背面\nカメラ1\n\n","teleP","背面\nカメラ2\n\n","解説付\n自動90秒\n\n","WiFi\nカメラ\n\n"]
-    let cameraTypeStringsE : Array<String> = ["Front\nCamera\n\n","Back\nCamera1\n\n","teleP","Back\nCamera2\n\n","with Video\nAuto90s\n\n","WiFi\nCamera\n\n"]
+//    let cameraTypeStrings : Array<String> = ["フロント\nカメラ\n\n","背面\nカメラ1\n\n","teleP","背面\nカメラ2\n\n","解説付\n自動90秒\n\n","WiFi\nカメラ\n\n"]
+//    let cameraTypeStringsE : Array<String> = ["Front\nCamera\n\n","Back\nCamera1\n\n","teleP","Back\nCamera2\n\n","with Video\nAuto90s\n\n","WiFi\nCamera\n\n"]
     
-    let explanationStrings : Array<String> = ["\n画面中央のボタンでも\n録画開始・録画終了できます\n\n録画中、録画終了ボタンは薄く表示されます","","telePhoto","","\n画面中央のボタンでも\n録画開始・解説スキップ・録画終了できます\n\n録画は約90秒後に自動的に終了します","\niPhone-WiFiのネットワークに\n\nユニメックWiFiカメラのSSIDを設定すると\n\nそのWiFiカメラの映像を記録できます\n\nカメラの上にiPhoneを載せて記録します"]
-    let explanationStringsE : Array<String> = ["\nThe screen-center button\nalso starts/stops recording.\n\nThe stop button dims during recording.","","telePhoto","","\nThe center button also starts recording,\nskips the explanation and stops recording.\n\nRecording automatically stops after 90s.","Set the Unimec WiFi Camera SSID\n\nin the iPhone-WiFi setting\n\nto record the video from the Camera."]
-    
+//    let explanationStrings : Array<String> = ["\n画面中央のボタンでも\n録画開始・録画終了できます\n\n録画中、録画終了ボタンは薄く表示されます","","telePhoto","","\n画面中央のボタンでも\n録画開始・解説スキップ・録画終了できます\n\n録画は約90秒後に自動的に終了します","\niPhone-WiFiのネットワークに\n\nユニメックWiFiカメラのSSIDを設定すると\n\nそのWiFiカメラの映像を記録できます\n\nカメラの上にiPhoneを載せて記録します"]
+//    let explanationStringsE : Array<String> = ["\nThe screen-center button\nalso starts/stops recording.\n\nThe stop button dims during recording.","","telePhoto","","\nThe center button also starts recording,\nskips the explanation and stops recording.\n\nRecording automatically stops after 90s.","Set the Unimec WiFi Camera SSID\n\nin the iPhone-WiFi setting\n\nto record the video from the Camera."]
+//    
     func setButtonsDisplay(){
         getPaddings()
         setButtonsLocation()
@@ -977,11 +891,11 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
                 startStopButton.alpha=0
             }
         }
-        if someFunctions.firstLang().contains("ja"){
-            explanationLabel.text = explanationStrings[cameraType]
-        }else{
-            explanationLabel.text = explanationStringsE[cameraType]
-        }
+//        if someFunctions.firstLang().contains("ja"){
+//            explanationLabel.text = explanationStrings[cameraType]
+//        }else{
+//            explanationLabel.text = explanationStringsE[cameraType]
+//        }
         //.isHidden=true
  //       stopButton.isHidden=true
     }
@@ -1061,11 +975,11 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
     
     func onCameraChange(_ incDec:Int,focusChange:Bool){
-        cameraType = camera.getUserDefaultInt(str: "cameraType", ret: 0)
-        
-        cameraType = cameraChange(cameraType,incDec: incDec)
+//        cameraType = camera.getUserDefaultInt(str: "cameraType", ret: 0)
+//        
+//        cameraType = cameraChange(cameraType,incDec: incDec)
         cameraType = 0
-        UserDefaults.standard.set(cameraType, forKey: "cameraType")
+//        UserDefaults.standard.set(cameraType, forKey: "cameraType")
         
         captureSession.stopRunning()
         set_rpk_ppk()
@@ -1080,18 +994,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
     
     func initSession(fps:Double,focusChange:Bool) {
-        // カメラ入力 : 背面カメラ
-        //        cameraType=UserDefaults.standard.integer(forKey:"cameraType")
-        
-        if cameraType == 0 || cameraType == 4 || cameraType == 5{//wifiCamera : 5
-            videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)//.back)
-        }else if cameraType == 1{
-            videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
-            //        }else if cameraType == 2{
-            //            videoDevice = AVCaptureDevice.default(.builtInTelephotoCamera, for: .video, position: .back)
-        }else if cameraType == 3{
-            videoDevice = AVCaptureDevice.default(.builtInUltraWideCamera, for: .video, position: .back)
-        }
+        videoDevice = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
+
         
         let videoInput = try! AVCaptureDeviceInput.init(device: videoDevice!)
         
@@ -1113,26 +1017,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         let height=view.bounds.height
         
         let videoLayer : AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-        //8,10,XR,XS,SE2,SE3 700M f2.2   11,12,13 1200M f2.2(fixFocus)   14,15,16,SE4 1200M f1.9(autoFocus)
-//        cropType = camera.getUserDefaultInt(str: "cropType", ret: 0)
         if !focusChange && (cameraType == 0 || cameraType == 4){//拡大した部分は隠す
-//            if cropType==0 || cameraType==0 || cameraType==4{//crop どこにどのサイズで表示するか。周りは隠す 1920/1080 16/9
-                videoLayer.frame = CGRect(x:leftPadding+10,y:height*2.5/6,width:height*(16/9)/6,height:height/6)
-//            }else if cropType==1{// 6/4倍拡大し、左拡大部分上下拡大部分は削除
-//                videoLayer.frame = CGRect(x:leftPadding+10-height*4/27,y:height*(2.5-0.25)/6,width:height*(16/9)/4,height:height/4)
-//            }else if cropType==2{// 6/3倍拡大し、左拡大部分上下拡大部分は削除
-//                videoLayer.frame = CGRect(x:leftPadding+10-height*8/27,y:height*(2.5-0.5)/6,width:height*(16/9)/3,height:height/3)
-//            }
-            
+            videoLayer.frame = CGRect(x:leftPadding+10,y:height*2.5/6,width:height*(16/9)/6,height:height/6)
         }else{//backCamera　拡大した部分は表示されない
-//            if cropType==0 || focusChange{
                 videoLayer.frame=self.view.bounds
-//            }else if cropType==1{//iPhoneSE, iPhone8 1.5倍にして右下2/3を表示）
-//                videoLayer.frame = CGRect(x:-width/2,y:-height/2,width:width*1.5,height:height*1.5)
-//            }else if cropType==2{//for iPhone16 2倍にして右下1/4を表示
-//                videoLayer.frame = CGRect(x:-width,y:-height,width:width*2,height:height*2)
-//  //              videoLayer.frame = CGRect(x:-width*3/4,y:-height,width:width*2,height:height*2)//1/8左にずらす
-//            }
         }
         videoLayer.videoGravity = AVLayerVideoGravity.resizeAspectFill
         
@@ -1297,23 +1185,11 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         camera.setLabelProperty(zoomBack,x:x0+bw+sp,y:by1,w:bw*2+sp,h:bh,UIColor.systemGray6,1)
         camera.setLabelProperty(zoomLabel,x:x0,y:by1,w:bw,h:bh,UIColor.white)
         camera.setLabelProperty(zoomValueLabel, x: x0+bw/2, y: by1, w: bw/2-2, h: bh/2, UIColor.white,0)
-//        cropSwitch.frame=CGRect(x:x0,y:by,width:bw*3+sp*2,height:bh)
-//        cropSwitch.layer.borderColor = UIColor.black.cgColor
-//        cropSwitch.layer.borderWidth = 1.0
-//        cropSwitch.layer.masksToBounds = true
-//        cropSwitch.layer.cornerRadius = 5
-//        cropSwitch.backgroundColor = UIColor.systemGray5
         zoomBack.backgroundColor = UIColor.systemGray5
         focusBack.backgroundColor = UIColor.systemGray5
         exposeBack.backgroundColor = UIColor.systemGray5
         //
         camera.setButtonProperty(helpButton,x:x0+bw*6+sp*6,y:by1/*by-bh-sp*/,w:bw,h:bh,UIColor.darkGray,0)
-//        camera.setButtonProperty(cameraChangeButton,x:x0+bw*6+sp*6,y:by1,w:bw,h:bh,UIColor.darkGray,0)
-//        camera.setLabelProperty(cameraTypeLabel,x:x0+bw*6+sp*6,y:by,w:bw,h:bh*2+sp,UIColor.darkGray,0)
-        //        cameraChangeBack.frame=CGRect(x:x0+bw*6+sp*6,y:cameraTypeLabel.frame.minY+bh/2,width:bw,height:bh)
-        //        setProperty(label: currentTime, radius: 4)
-        
-        //        camera.setButtonProperty(gyroButton,x:x0+bw*6+sp*6,y:topPadding+sp,w:bw,h:bh,UIColor.darkGray,0)
         
         camera.setButtonProperty(playButton,x:x0+bw*6+sp*6,y:topPadding+sp,w:bw,h:bw*realWinHeight/realWinWidth,UIColor.darkGray,0)
         camera.setButtonProperty(listButton,x:x0+bw*6+sp*6,y:playButton.frame.maxY+sp,w:bw,h:bh,UIColor.darkGray,0)
@@ -1323,24 +1199,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         //        currentTime.alpha=0.5
         quaternionView.frame=CGRect(x:leftPadding+sp,y:sp,width:realWinHeight/5,height:realWinHeight/5)
         startStopButton.frame=CGRect(x:leftPadding+realWinWidth/2-realWinHeight*4/10,y:realWinHeight/10+topPadding,width: realWinHeight*4/5,height: realWinHeight*4/5)
-        
-        
- //       startButton.frame=CGRect(x:x0+bw*6+sp*6-sp,y:(realWinHeight-bw)/2-sp,width: bw+2*sp,height:bw+2*sp)
-//        stopButton.frame=CGRect(x:x0+bw*6+sp*6-sp,y:(realWinHeight-bw)/2-sp,width: bw+2*sp,height:bw+2*sp)
-//        if someFunctions.firstLang().contains("ja"){
-//            cropSwitch.setTitle("そのまま",forSegmentAt: 0)
-//            cropSwitch.setTitle("切取 １",forSegmentAt: 1)
-//            cropSwitch.setTitle("切取 ２",forSegmentAt: 2)
-//        }else{
-//            cropSwitch.setTitle("As is",forSegmentAt: 0)
-//            cropSwitch.setTitle("Crop 1",forSegmentAt: 1)
-//            cropSwitch.setTitle("Crop 2",forSegmentAt: 2)
-//        }
-        let normalTextAttributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 18) // 18ptに設定
-        ]
-//        cropSwitch.setTitleTextAttributes(normalTextAttributes, for: .normal)
-        
+         
     }
     func applicationDidEnterBackground(_ application: UIApplication) {
         // アプリがバックグラウンドに移行する直前に呼ばれる
@@ -1355,10 +1214,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             //               print("⚠️ 録画開始後1秒以内。録画停止ブロック中。")
             return
         }
-//        if cameraType==4 && cameraType4_mode != "none" {
-//            cameraType4StartStop(mode:"stop")
-//            return
-//        }
+
         recordingFlag = false
         helpButton.isHidden = false
         setButtonsDisplay()
@@ -1430,30 +1286,16 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         focusBar.isHidden=hide
         focusBack.isHidden=hide
     }
-//    func LEDParts(hide:Bool){
-//        LEDLabel.isHidden=hide
-//        LEDValueLabel.isHidden=hide
-//        LEDBar.isHidden=hide
-//        LEDBack.isHidden=hide
-////        focusBack.isHidden=hide
-//    }
+
     func hideButtonsSlides() {
         zoomParts(hide:true)
         exposeParts(hide:true)
         focusParts(hide:true)
-//        cameraChangeButton.isHidden=true
         currentTime.isHidden=false
     }
     var timerCntTime = CFAbsoluteTimeGetCurrent()
     
- //   @IBAction func onClickStartButton(_ sender: Any) {
-//        checkScreenUp()
-//        if cameraType == 4{
-//            cameraType4StartStop(mode:"videoStart")
-//            return
-//        }
- //       startRecording(option: "default") // デフォルト引数で呼ぶ
-//    }
+ 
     var canStartRecording:Bool=true
     var canStopRecording:Bool=true
     func startRecording(option: String) {
@@ -1482,14 +1324,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         DispatchQueue.main.asyncAfter(deadline: .now() + 300) {//executeAfter5Minutes()
             UIApplication.shared.isIdleTimerDisabled = false//スリープさせる
         }
-        if cameraType == 5{
-//            let nextView = storyboard?.instantiateViewController(withIdentifier: "WIFI") as! WifiViewController
-//            //            nextView.recordingFlag=true
-//            stopMotionUpdates()
-//            //            motionManager.stopDeviceMotionUpdates()
-//            self.present(nextView, animated: false, completion: nil)
-            return
-        }
+
         MyFunctions().makeSound()
         
         listButton.isHidden=true
@@ -1497,14 +1332,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             quaternionView.isHidden=true
             cameraView.isHidden=true
             currentTime.alpha=0.001//0.1
-//            if cameraType==4{
-//                stopButton.alpha=0.03
-//            }
         }
         
         try? FileManager.default.removeItem(atPath: TempFilePath)
-        //      startRecord()
-//        stopButton.isEnabled=true
+
         recordingFlag=true
         
         fileWriter!.startWriting()
@@ -1517,19 +1348,14 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             if recordingFlag==true{
                 onClickStopButton()
             }else{
-//                onClickStartButton(self)
                 startRecording(option: "default") // デフォルト引数で呼ぶ
-
             }
-        }else if cameraType==4{
-            cameraType4StartStop(mode:"tap")
         }
     }
     
     @IBAction func tapGest(_ sender: UITapGestureRecognizer) {
         startMotionUpdates()
     }
-    var cameraType4_mode:String="none"
     var isManuallySoundStopped = false
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         //        print("🎵 再生が終了しました")
@@ -1538,7 +1364,6 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             isManuallySoundStopped = false // 忘れずリセット
             return
         }
-        cameraType4_mode="none"//
         onClickStopButton()
     }
     @objc func playerDidFinishPlaying(notification: Notification) {
@@ -1558,85 +1383,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         whiteView.layer.sublayers?.removeAll(where: { $0 is AVPlayerLayer })
         // 通知の解除（登録していた場合）
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: notification.object)
-     //   cameraType4_mode="videoStoped"
-      //  cameraType4StartStop(mode: "videostoped")
     }
-    
-    func cameraType4StartStop(mode:String){
-   /*     if cameraType4_mode=="none"{//ここでビデオ再生させる
-            cameraType4_mode="videoPlaying"
-            recordingFlag=true
-            setButtonsDisplay()
-            recordingFlag=false
-            playMoviePath(Locale.preferredLanguages.first?.hasPrefix("ja") == true ? "positional":"positional_eng")
-            quaternionView.isHidden=true
-  //          stopButton.isEnabled=true
-            currentTime.alpha=0.001
-        }else if cameraType4_mode=="videoPlaying"{//ビデオ再生中に呼ばれたら、ビデオを止めて音声ファイル再生
-            stopAndDisposePlayer()
-            cameraType4_mode="audioPlaying"
-            recordingFlag=true
-            setButtonsDisplay()
-            recordingFlag=false
-            quaternionView.isHidden = true
-            currentTime.isHidden = true
-            cameraView.isHidden=false
-            //下を実行するとsound終了時に録画stopが呼ばれる。途中で手動で録画stopした時はキャンセルする必要がある
-            isManuallySoundStopped=false
-            sound(snd:Locale.preferredLanguages.first?.hasPrefix("ja") == true ? "positional":"positional_eng",fwd:0)
-            scheduleStartRecording(after: 10)
-        }else if cameraType4_mode=="videoStoped"{//ビデオ終了時に自動で呼ばれたとき、音声ファイル再生
-            //            print("videoStoped")
-            cameraType4_mode="audioPlaying"
-            recordingFlag=true
-            setButtonsDisplay()
-            recordingFlag=false
-            quaternionView.isHidden = true
-            currentTime.isHidden = true
-            cameraView.isHidden=false
-            //下を実行するとsound終了時に録画stopが呼ばれる。途中で手動で録画stopした時はキャンセルする必要がある
-            isManuallySoundStopped=false
-            sound(snd:Locale.preferredLanguages.first?.hasPrefix("ja") == true ? "positional":"positional_eng",fwd:0)
-            scheduleStartRecording(after: 10)
-            
-        }else if cameraType4_mode=="recording"{//
-            guard canStopRecording else {
-                //                 print("⚠️ 録画開始後1秒以内。録画停止ブロック中。")
-                return
-            }
-            cameraType4_mode="none"
-            isManuallySoundStopped = true
-            soundPlayer?.stop()
-            //             isManuallySoundStopped = true
-            onClickStopButton()
-        }else if cameraType4_mode=="audioPlaying"{//音声ファイル再生中に呼ばれたら
-            cameraType4_mode="recording"
-            soundPlayer?.currentTime=10
-            cancelScheduledRecording()
-            self.startRecording(option: "cameraType4StartRecording")
-        }*/
-    }
-    
-//    var delayedRecordingTask: DispatchWorkItem?
-//    func cancelScheduledRecording() {
-//        delayedRecordingTask?.cancel()
-//        delayedRecordingTask = nil
-//    }
-    /// 指定秒後に録画を開始する処理を予約する（前回予約があればキャンセルする）
-//    func scheduleStartRecording(after delay: TimeInterval) {
-//        // 既存の予約があればキャンセル
-//        delayedRecordingTask?.cancel()
-//        
-//        let task = DispatchWorkItem { [weak self] in
-//            guard let self = self else { return }
-//            self.cameraType4_mode = "recording"
-//            self.startRecording(option: "cameraType4StartRecording")
-//        }
-//        
-//        delayedRecordingTask = task
-//        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: task)
-//    }
-    
+  
     func setExpose(expose:Float) {
         if let currentDevice=videoDevice{
             exposeValueLabel.text=Int(expose*1000/80).description
@@ -1710,16 +1458,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             //frameの時間計算, sampleBufferの時刻から算出
             let frameTime:CMTime = CMTimeMake(value: sampleBuffer.outputPresentationTimeStamp.value - startTimeStamp, timescale: sampleBuffer.outputPresentationTimeStamp.timescale)
             //3/2倍はこれで良い
-            var x0:CGFloat=0
-            var y0:CGFloat=0
-            if cameraType==0 || cameraType==4{
-                x0=0
-                y0=120
-            }else{
-                x0=640
-                y0=0
-            }
-            let frameUIImage = (cameraType==0 || cameraType==4) ? UIImage(ciImage:rotatedCIImage):UIImage(ciImage: rotatedCIImage.cropped(to: CGRect(x:x0,y:y0,width:1280,height: 720)))
+            let x0:CGFloat=0
+            let y0:CGFloat=120
+          
+            let frameUIImage = UIImage(ciImage:rotatedCIImage)
             UIGraphicsBeginImageContext(CGSize(width: iCapNYSWidthF, height: iCapNYSHeightF))
             frameUIImage.draw(in: CGRect(x:0, y:0, width:iCapNYSWidthF, height: iCapNYSHeightF))
             quaterImage!.draw(in: CGRect(x:iCapNYSWidthF120, y:iCapNYSWidthF120, width:iCapNYSHeightF5,height: iCapNYSHeightF5))
@@ -1741,11 +1483,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             }
         }else{//cropType 2
             var scaX:CGFloat=0
-//            if cameraType==0{
-//                scaX=4/3//6/4
-//            }else{
-                scaX=4/3
-//            }
+            scaX=4/3
             let scaling = CGAffineTransform(scaleX:scaX,y:scaX)
             //            let scaling = CGAffineTransform(scaleX:1.5,y:1.5)
             let matrix = matrix1.concatenating(matrix2).concatenating(scaling) //3つのアフィンを組み合わせ
@@ -1789,20 +1527,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             
             //frameの時間計算, sampleBufferの時刻から算出
             let frameTime:CMTime = CMTimeMake(value: sampleBuffer.outputPresentationTimeStamp.value - startTimeStamp, timescale: sampleBuffer.outputPresentationTimeStamp.timescale)
-            //       let frameUIImage = UIImage(ciImage: rotatedCIImage!)
-            //       let y0:CGFloat = cameraType == 0 || cameraType == 4 ? 270.0:0.0
-            var x0:CGFloat=0
-            var y0:CGFloat=0
-            //2560x1440
-//            if cameraType==0{//frontCamera x:0,y:360,w:1280,h:720
-//                x0=0
-//                y0=360
-//            }else{//backCamera x:1280,y:0,w:1280,h:720
-//                x0=1280-320//1/8ずらす
-                x0=1280//ok
-                y0=0//ok
-//            }
-            
+           
+            let x0=1280//ok
+            let y0=0//ok
+        
             //cropTpe1:2343*1318 cropType2:2560*1440
             let frameUIImage = UIImage(ciImage: rotatedCIImage.cropped(to: CGRect(x:x0,y:y0,width:1280,height: 720)))
 #if DEBUG
