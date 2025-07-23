@@ -489,7 +489,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             exposeValue=exposeValue//.getでgetDefaultしてその値を.setする。.setでsetExposeしそこでexposeValue表示
         }
         zoomBar.minimumValue = 0
-        zoomBar.maximumValue = 0.02
+        zoomBar.maximumValue = 0.2
         zoomBar.addTarget(self, action: #selector(onZoomValueChange), for: UIControl.Event.valueChanged)
         setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_front", ret: 0.0))
         
