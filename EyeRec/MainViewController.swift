@@ -580,23 +580,15 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         }else{
             focusBar.value=camera.getUserDefaultFloat(str: "focusValue_back", ret: 0)
         }
-//        if cameraType == 0 || cameraType == 4{
-            setFocus(focus:focusBar.value)
-//        }else{
-//            configureAutoFocus()
-//        }
+        setFocus(focus:focusBar.value)
+
         if cameraType == 5{
             cameraView.isHidden=true
             captureSession.stopRunning()
         }
         exposeValue=exposeValue//getDefaultしてその値をsetする。setでsetExposeしそこでexposeValue表示
-//        cropType = camera.getUserDefaultInt(str: "cropType", ret: 0)
-//        cropSwitch.selectedSegmentIndex = cropType
         currentTime.isHidden=true
-  //      startButton.isHidden=false
-  //      stopButton.isHidden=true
-    //    stopButton.isEnabled=false
-        setButtonsLocation()
+          setButtonsLocation()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
             setZoom(level: camera.getUserDefaultFloat(str: "zoomValue_front", ret: 0.0))
