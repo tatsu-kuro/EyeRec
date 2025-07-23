@@ -303,12 +303,6 @@
                                     <action selector="onClickStartButton:" destination="Hp4-gK-9UW" eventType="touchUpInside" id="zgY-w5-GBI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" fixedFrame="YES" contentHorizontalAlignment="fill" contentVerticalAlignment="fill" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pah-7o-hki">
-                                <rect key="frame" x="464" y="160" width="36" height="31"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemOrangeColor"/>
-                                <state key="normal" image="stop.circle" catalog="system"/>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="rQ7-Kf-AuZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -505,7 +499,6 @@
         <image name="envelope.fill" catalog="system" width="128" height="85"/>
         <image name="pause.fill" catalog="system" width="114" height="128"/>
         <image name="play.fill" catalog="system" width="120" height="128"/>
-        <image name="stop.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
