@@ -1363,10 +1363,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             //               print("⚠️ 録画開始後1秒以内。録画停止ブロック中。")
             return
         }
-        if cameraType==4 && cameraType4_mode != "none" {
-            cameraType4StartStop(mode:"stop")
-            return
-        }
+//        if cameraType==4 && cameraType4_mode != "none" {
+//            cameraType4StartStop(mode:"stop")
+//            return
+//        }
         recordingFlag = false
         helpButton.isHidden = false
         setButtonsDisplay()
@@ -1456,10 +1456,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     
     @IBAction func onClickStartButton(_ sender: Any) {
 //        checkScreenUp()
-        if cameraType == 4{
-            cameraType4StartStop(mode:"videoStart")
-            return
-        }
+//        if cameraType == 4{
+//            cameraType4StartStop(mode:"videoStart")
+//            return
+//        }
         startRecording(option: "default") // デフォルト引数で呼ぶ
     }
     var canStartRecording:Bool=true
@@ -1564,12 +1564,12 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         whiteView.layer.sublayers?.removeAll(where: { $0 is AVPlayerLayer })
         // 通知の解除（登録していた場合）
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: notification.object)
-        cameraType4_mode="videoStoped"
-        cameraType4StartStop(mode: "videostoped")
+     //   cameraType4_mode="videoStoped"
+      //  cameraType4StartStop(mode: "videostoped")
     }
     
     func cameraType4StartStop(mode:String){
-        if cameraType4_mode=="none"{//ここでビデオ再生させる
+   /*     if cameraType4_mode=="none"{//ここでビデオ再生させる
             cameraType4_mode="videoPlaying"
             recordingFlag=true
             setButtonsDisplay()
@@ -1620,28 +1620,28 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             soundPlayer?.currentTime=10
             cancelScheduledRecording()
             self.startRecording(option: "cameraType4StartRecording")
-        }
+        }*/
     }
     
-    var delayedRecordingTask: DispatchWorkItem?
-    func cancelScheduledRecording() {
-        delayedRecordingTask?.cancel()
-        delayedRecordingTask = nil
-    }
+//    var delayedRecordingTask: DispatchWorkItem?
+//    func cancelScheduledRecording() {
+//        delayedRecordingTask?.cancel()
+//        delayedRecordingTask = nil
+//    }
     /// 指定秒後に録画を開始する処理を予約する（前回予約があればキャンセルする）
-    func scheduleStartRecording(after delay: TimeInterval) {
-        // 既存の予約があればキャンセル
-        delayedRecordingTask?.cancel()
-        
-        let task = DispatchWorkItem { [weak self] in
-            guard let self = self else { return }
-            self.cameraType4_mode = "recording"
-            self.startRecording(option: "cameraType4StartRecording")
-        }
-        
-        delayedRecordingTask = task
-        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: task)
-    }
+//    func scheduleStartRecording(after delay: TimeInterval) {
+//        // 既存の予約があればキャンセル
+//        delayedRecordingTask?.cancel()
+//        
+//        let task = DispatchWorkItem { [weak self] in
+//            guard let self = self else { return }
+//            self.cameraType4_mode = "recording"
+//            self.startRecording(option: "cameraType4StartRecording")
+//        }
+//        
+//        delayedRecordingTask = task
+//        DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: task)
+//    }
     
     func setExpose(expose:Float) {
         if let currentDevice=videoDevice{
