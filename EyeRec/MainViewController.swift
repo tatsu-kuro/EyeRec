@@ -167,11 +167,11 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     @IBOutlet weak var previewSwitch: UISwitch!
     
     @IBAction func onPreviewSwitch(_ sender: Any) {
-        if previewSwitch.isOn==true{
-            UserDefaults.standard.set(1, forKey: "previewOn")
-        }else{
-            UserDefaults.standard.set(0, forKey: "previewOn")
-        }
+//        if previewSwitch.isOn==true{
+//            UserDefaults.standard.set(1, forKey: "previewOn")
+//        }else{
+//            UserDefaults.standard.set(0, forKey: "previewOn")
+//        }
         setButtonsDisplay()
     }
     
@@ -392,8 +392,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             setZoom(level: Float(zoomValue))
             onCameraChange(0,focusChange: false)
               if cameraType==0{
-                previewLabel.isHidden=false
-                previewSwitch.isHidden=false
+              //  previewLabel.isHidden=false
+              //  previewSwitch.isHidden=false
                 startStopButton.alpha=1.0
             }
         }
@@ -402,8 +402,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         if cameraType==0{
             onCameraChange(0,focusChange: true)
             //        initSession(fps: 60,focusChange:true)
-            previewLabel.isHidden=true
-            previewSwitch.isHidden=true
+          //  previewLabel.isHidden=true
+          //  previewSwitch.isHidden=true
             explanationLabel.isHidden=true
             startStopButton.alpha=0
         }
@@ -501,7 +501,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         }else{
             previewSwitch.isOn=true
         }
-        setPreviewLabel()
+        previewSwitch.isOn=false//常にfalse
+  //      setPreviewLabel()
         
         set_rpk_ppk()
         startMotionUpdates()
@@ -800,9 +801,11 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     func setButtonsDisplay(){
         getPaddings()
         setButtonsLocation()
-        
+        previewLabel.isHidden=true
+        previewSwitch.isHidden=true
+
 //        setButtonsFrontCameraMode()
-        setPreviewLabel()
+//        setPreviewLabel()
         zoomParts(hide: false)
         exposeParts(hide: false)
         cameraView.isHidden=false
@@ -822,8 +825,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
  //           stopButton.isHidden=false
    //         startButton.isHidden=true
             currentTime.isHidden=false
-            previewLabel.isHidden=true
-            previewSwitch.isHidden=true
+  //          previewLabel.isHidden=true
+   //         previewSwitch.isHidden=true
             playButton.isHidden=true
             listButton.isHidden=true
             helpButton.isHidden=true
@@ -1075,7 +1078,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
     
     func setPreviewLabel(){
-        if cameraType == 0 && setteiMode != 2{
+        /*if cameraType == 0 && setteiMode != 2{
             previewLabel.isHidden=false
             previewSwitch.isHidden=false
             if previewSwitch.isOn{
@@ -1094,7 +1097,9 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         }else{
             previewLabel.isHidden=true
             previewSwitch.isHidden=true
-        }
+        }*/
+        previewLabel.isHidden=true
+        previewSwitch.isHidden=true
     }
     
  /*   func configureAutoFocus() {
@@ -1147,9 +1152,9 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         let by = realWinHeight - (bh+sp)*2// - bh*2/3//-height
         let x0=leftPadding+sp*2
         
-        previewSwitch.frame = CGRect(x:leftPadding+10,y:view.bounds.height*3.5/6+sp,width: bw,height: bh)
-        let y1=previewSwitch.frame.minY+(previewSwitch.frame.height-bh)/2
-        previewLabel.frame=CGRect(x:previewSwitch.frame.maxX+sp/2,y:y1,width: bw*5,height: bh)
+//        previewSwitch.frame = CGRect(x:leftPadding+10,y:view.bounds.height*3.5/6+sp,width: bw,height: bh)
+//        let y1=previewSwitch.frame.minY+(previewSwitch.frame.height-bh)/2
+//        previewLabel.frame=CGRect(x:previewSwitch.frame.maxX+sp/2,y:y1,width: bw*5,height: bh)
         explanationLabel.frame=CGRect(x:x0,y:sp,width:realWinWidth-sp*4,height: zoomLabel.frame.minY-sp)
         focusBar.frame = CGRect(x:x0+bw*4+sp*4, y: by1, width:bw*2+sp, height: bh)
   //      LEDBar.frame = CGRect(x:x0+bw*4+sp*4, y: by-sp-bh, width:bw*2+sp, height: bh)
@@ -1174,7 +1179,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         camera.setButtonProperty(helpButton,x:x0+bw*6+sp*6,y:by1/*by-bh-sp*/,w:bw,h:bh,UIColor.darkGray,0)
         
         camera.setButtonProperty(playButton,x:x0+bw*6+sp*6,y:topPadding+sp,w:bw,h:bw*realWinHeight/realWinWidth,UIColor.darkGray,0)
-        camera.setButtonProperty(listButton,x:x0+bw*6+sp*6,y:playButton.frame.maxY+sp,w:bw,h:bh,UIColor.darkGray,0)
+        camera.setButtonProperty(listButton,x:x0+bw*6+sp*6,y:playButton.frame.maxY+2*sp,w:bw,h:bh,UIColor.darkGray,0)
         
         currentTime.font = UIFont.monospacedDigitSystemFont(ofSize: view.bounds.width/30, weight: .medium)
         currentTime.frame = CGRect(x:x0+sp*6+bw*6, y: topPadding+sp, width: bw, height: bw*240/440)
@@ -1310,7 +1315,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         MyFunctions().makeSound()
         
         listButton.isHidden=true
-        if (cameraType == 0 && previewSwitch.isOn==false) || cameraType == 4{
+        if (cameraType == 0){//} && previewSwitch.isOn==false) || cameraType == 4{
             quaternionView.isHidden=true
             cameraView.isHidden=true
             currentTime.alpha=0.001//0.1
