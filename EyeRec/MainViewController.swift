@@ -266,7 +266,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
     
     @IBOutlet weak var startStopButton: UIButton!
-    @IBOutlet weak var currentTime: UILabel!
+//    @IBOutlet weak var currentTime: UILabel!
     @IBOutlet weak var quaternionView: UIImageView!
     @IBOutlet weak var cameraView:UIImageView!
     @IBOutlet weak var whiteView: UIImageView!
@@ -281,7 +281,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         if let device = videoDevice {
             // 表示用：1.0～6.0倍に変換した倍率を1000倍（例: 2.5倍 → 2500）して表示
             let zoomFactor = 1.0 + CGFloat(level) * (min(6.0, device.maxAvailableVideoZoomFactor) - 1.0)
-            zoomValueLabel.text = String(format: "%.1f×", zoomFactor)
+            zoomValueLabel.text = String(format: "%.1f", zoomFactor)
 
             do {
                 try device.lockForConfiguration()
@@ -472,10 +472,10 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             screenUpDown=motion.gravity.z<0 ? true : false
             let elapsed = CFAbsoluteTimeGetCurrent() - self.timerCntTime
             let currentInt = Int(elapsed)
-            if currentInt != self.lastTimeInt {
-                self.currentTime.text = String(format: "%01d:%02d", currentInt / 60, currentInt % 60)
-                self.lastTimeInt = currentInt
-            }
+//            if currentInt != self.lastTimeInt {
+//                self.currentTime.text = String(format: "%01d:%02d", currentInt / 60, currentInt % 60)
+//                self.lastTimeInt = currentInt
+//            }
             //              self.updateHeadFrom(quat: quat)
         }
        //ここでscreenが上か下かチェックしてdrawHead()で頭を回転させる。
@@ -504,7 +504,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         setFocus(focus:focusBar.value)
 
         exposeValue=exposeValue//getDefaultしてその値をsetする。setでsetExposeしそこでexposeValue表示
-        currentTime.isHidden=true
+//        currentTime.isHidden=true
           setButtonsLocation()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
@@ -559,7 +559,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
     }
     
     var timerCnt:Int=0
-    var lastTimeInt:Int=0
+//    var lastTimeInt:Int=0
     // 旧：var autholizedFlag:Bool=false
     private var didCreateAlbumAfterAuthorization = false
     
@@ -789,7 +789,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             hideButtonsSlides()
 //            explanationLabel.isHidden=true
 
-            currentTime.isHidden=false
+//            currentTime.isHidden=false
             
             playButton.isHidden=true
             listButton.isHidden=true
@@ -797,13 +797,13 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
             startStopButton.alpha=0.015
             quaternionView.alpha=0.0
             cameraView.alpha=0.3
-            currentTime.alpha=0.001//0.1
+//            currentTime.alpha=0.001//0.1
           }else{//not recording
 //            explanationLabel.isHidden=true//false
-            currentTime.isHidden=true
+//            currentTime.isHidden=true
             playButton.isHidden=false
             listButton.isHidden=false
-            currentTime.alpha=1
+//            currentTime.alpha=1
             cameraView.alpha=1
             quaternionView.alpha=1
             zoomParts(hide: false)
@@ -1040,8 +1040,8 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         camera.setButtonProperty(playButton,x:x0+bw*6+sp*6,y:topPadding+sp,w:bw,h:bw*realWinHeight/realWinWidth,UIColor.darkGray,0)
         camera.setButtonProperty(listButton,x:x0+bw*6+sp*6,y:playButton.frame.maxY+2*sp,w:bw,h:bh,UIColor.darkGray,0)
         
-        currentTime.font = UIFont.monospacedDigitSystemFont(ofSize: view.bounds.width/30, weight: .medium)
-        currentTime.frame = CGRect(x:x0+sp*6+bw*6, y: topPadding+sp, width: bw, height: bw*240/440)
+//        currentTime.font = UIFont.monospacedDigitSystemFont(ofSize: view.bounds.width/30, weight: .medium)
+//        currentTime.frame = CGRect(x:x0+sp*6+bw*6, y: topPadding+sp, width: bw, height: bw*240/440)
         //        currentTime.alpha=0.5
         quaternionView.frame=CGRect(x:leftPadding+sp,y:sp,width:realWinHeight/5,height:realWinHeight/5)
         startStopButton.frame=CGRect(x:leftPadding+realWinWidth/2-realWinHeight*4/10,y:realWinHeight/10+topPadding,width: realWinHeight*4/5,height: realWinHeight*4/5)
@@ -1139,7 +1139,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         zoomParts(hide:true)
         exposeParts(hide:true)
         focusParts(hide:true)
-        currentTime.isHidden=false
+//        currentTime.isHidden=false
     }
     var timerCntTime = CFAbsoluteTimeGetCurrent()
     
@@ -1161,7 +1161,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
 
         timerCnt=0
         timerCntTime=CFAbsoluteTimeGetCurrent()
-        currentTime.text="0:00"
+//        currentTime.text="0:00"
         recordingFlag=true
         helpButton.isHidden=true
         setButtonsDisplay()
@@ -1177,7 +1177,7 @@ class MainViewController: UIViewController, AVCaptureVideoDataOutputSampleBuffer
         if (cameraType == 0){
             quaternionView.isHidden=true
             cameraView.isHidden=true
-            currentTime.alpha=0.001//0.1
+//            currentTime.alpha=0.001//0.1
         }
         
         try? FileManager.default.removeItem(atPath: TempFilePath)
