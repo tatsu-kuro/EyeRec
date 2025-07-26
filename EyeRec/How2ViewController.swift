@@ -71,7 +71,7 @@ class How2ViewController: UIViewController {
         labelTop.sizeToFit()
         
         // imageViewOnScrollView（1枚目の画像）
-        let img = UIImage(named: "fix2")!
+        let img = UIImage(named: "boyiPhone")!
         let imgW = img.size.width
         let imgH = img.size.height
         let imageHeight = ww * imgH / imgW
@@ -109,21 +109,21 @@ class How2ViewController: UIViewController {
     }
    
     func getTextEn()->String{
-        let text = "This is an app for recording your own nystagmus using the front camera. Recording starts when you press the Start button in the center of the screen. While recording, the Stop button is faint and barely visible, but it is located in the center of the screen. Tapping that area will stop the recording. A thumbnail of the recorded video will appear in the top right corner of the screen, and tapping it will play the video.\n"
+        let text = "This is an app for recording your own nystagmus using the front-facing camera. Tap the Start button in the center of the screen to begin recording. During recording, the Stop button is very faint and nearly invisible, but it remains in the center of the screen. Tapping that area will stop the recording.\n\nTo capture clear footage of nystagmus, it is important to keep the iPhone fixed in front of your eyes."
         return text
     }
     func getTextEn1()->String{
-        var text = "Using a simple goggle like the one shown in the top-left photo allows you to capture stable, shake-free footage. By fixing the iPhone in place with a cut piece of cardboard against your cheeks and forehead, as shown in the top-right photo, you can also achieve relatively stable video.\n"
+        var text = "Even just by spreading your palms to hold the iPhone with both hands and pressing both thumbs against your cheeks to stabilize it, you can capture relatively shake-free footage once you get used to it. As shown in the top right photo, using a piece of cut cardboard to support the iPhone and fix it against your left cheek and forehead can also help you record stable footage.\n"
         
-        text += "Even just holding the iPhone with your palms spread and supporting it from both index to little fingers, while pressing both thumbs against your cheeks, can produce stable footage once you get used to it. \n\nThe most recently recorded nystagmus video is displayed as a thumbnail in the upper right corner. Tapping the thumbnail will play the video. The button below the thumbnail shows a list of all recorded videos, which are displayed by recording date and duration. You can tap an item to play it, or swipe it left to delete it. All nystagmus videos are stored in the iCapNYS album, so you can also manage them—playback, deletion, and sharing—using the Photos app.\n\n"
+        text += "\nThe most recently recorded nystagmus video is displayed as a thumbnail in the upper right corner. Tapping the thumbnail will play the video. The button below the thumbnail shows a list of all recorded videos, which are displayed by recording date and duration. You can tap an item to play it, or swipe it left to delete it. All nystagmus videos are stored in the iCapNYS album, so you can also manage them—playback, deletion, and sharing—using the Photos app.\n\n"
         return text
     }
     func getTextJa()->String{
-        let text =  "フロントカメラで自分の眼振を録画するアプリです。中央のスタートボタンを押すと録画開始します。録画中はストップボタンは薄くてほとんど見えませんが、スクリーン中央にあります。そこをタップすると録画終了します。録画した動画のサムネールがスクリーン右上に表示され、それをタップすると再生されます。\n"
+        let text =  "フロントカメラで自分の眼振を録画するアプリです。中央のスタートボタンを押すと録画開始します。録画中はストップボタンは薄くてほとんど見えませんが、スクリーン中央にあります。そこをタップすると録画終了します。\n\n眼振を綺麗に撮影するために、iPhoneを目の前に固定する必要があります。"
         return text
     }
     func getTextJa1()->String{
-        var text = "上左写真のような簡単なゴーグルを使うとブレのない映像が撮れます。上右写真のようにカットした段ボールで、頬と額に固定するとブレの少ない映像が撮れます。\n手の平を広げて両手の人差し指から小指まででiPhoneを支え、両手の親指を両頬に当てて固定するだけでも、慣れればブレの少ない映像が撮れます。\n\n"
+        var text = "手の平を広げて両手でiPhoneを支え、両手の親指を両頬に当てて固定するだけでも、慣れればブレの少ない映像が撮れます。上右写真のようにカットした段ボールでiPhoneを支え、左頬と額に固定するとブレの少ない映像が撮れます。\n\n"
         text += "最後に撮影した眼振動画は右上にサムネイルとして表示され、それをタップすると再生出来ます。サムネイルの下のボタンで動画が一覧表示されます。動画は撮影日時（長さ）で一覧表示されます。項目をタップすると再生出来ます。項目を左にスワイプスすると削除できます。眼振動画はiCapNYSアルバムの中に入っていますので、写真アプリでも再生、削除、送信などの管理ができます。\n再生画面から再生中の動画をメールで送信できます。\n\n"
         return text
     }

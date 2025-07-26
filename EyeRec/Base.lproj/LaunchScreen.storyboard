@@ -19,7 +19,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CFf-MR-qy4">
                                 <rect key="frame" x="48" y="208" width="800" height="151"/>
-                                <string key="text">2025-7-23 Version 1.0
+                                <string key="text">2025-7-25 Version 1.0
 Hiroaki Fushiki
 Kuroda ENT</string>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="29"/>
