@@ -71,7 +71,7 @@ class How2ViewController: UIViewController {
         labelTop.sizeToFit()
         
         // imageViewOnScrollView（1枚目の画像）
-        let img = UIImage(named: "boyiPhone")!
+        let img = UIImage(named: "boyfix")!
         let imgW = img.size.width
         let imgH = img.size.height
         let imageHeight = ww * imgH / imgW
